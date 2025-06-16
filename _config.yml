@@ -1,0 +1,157 @@
+# Site configuration
+
+# 1. Files excluded from Jekyll builds
+exclude:
+- README.md
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- screenshot.png
+- LICENSE
+- CNAME
+- Gemfile
+- Gemfile.lock
+- alembic-jekyll-theme.gemspec
+- .jekyll-cache
+
+# 2. Installed Gems
+plugins:
+- jekyll-sitemap
+- jekyll-paginate
+- jekyll-seo-tag
+- jekyll-redirect-from
+- jekyll-feed
+- jekyll-commonmark
+- jekyll-include-cache
+# - jekyll-mentions  # 禁用不需要的功能
+# - jemoji           # 禁用不需要的功能
+
+# 3. Gem settings
+paginate: 10 # 每页文章数量增加到10篇
+paginate_path: blog/page:num 
+# jekyll-mentions: https://twitter.com # 已禁用
+author: Liyck # 您的名字
+social: 
+  name: Liyck # 您的真实姓名
+  links:  
+    - https://github.com/Liyck
+    - https://twitter.com/your_twitter # 替换为您的Twitter
+    - https://weibo.com/your_weibo # 替换为您的微博
+
+# 4. Jekyll settings
+sass:
+  style: compressed 
+permalink: pretty  
+excerpt_separator: <!-- more --> 
+timezone: Asia/Shanghai # 修改为上海时区
+
+# 5. Collections
+collections:
+  posts:
+    title: 文章 # 修改为中文
+    output: true
+    description: "技术探索与生活思考" # 文章列表描述
+    feature_text: |
+      欢迎来到我的博客
+    feature_image: "/assets/images/banner.jpg" # 使用本地图片
+
+# 6. Jekyll collections settings
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      image: "/assets/default-social-image.png"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post 
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page 
+
+# 7. Site settings
+encoding: utf-8 
+lang: zh-CN # 修改为中文
+title: "Liyck的技术博客" # 博客名称
+logo: "/assets/logos/logo.svg" 
+description: "分享编程技术、开发经验和生活感悟的个人博客" # 博客描述
+url: "https://liyckonline.top" # 您的域名
+baseurl: ""
+repo: "https://github.com/Liyck/Liyck.github.io" # 您的仓库
+email: "your_email@example.com" # 您的邮箱
+date_format: "%Y年%-m月%-d日" # 中文日期格式
+css_inline: true 
+locale: zh_CN # 添加区域设置
+
+# 8. Site favicons & manifest icons
+favicons: 
+  16: '/assets/logos/logo@16px.png'
+  32: '/assets/logos/logo@32px.png'
+  96: '/assets/logos/logo@96px.png'
+  120: '/assets/logos/logo@120px.png'
+  144: '/assets/logos/logo@144px.png'
+  180: '/assets/logos/logo@180px.png'
+  512: '/assets/logos/logo@512px.png'
+  1024: '/assets/logos/logo@1024px.png'
+
+# 9. Site navigation
+navigation_header:
+- title: 首页
+  url: /
+- title: 博客
+  url: /blog/
+- title: 分类
+  url: /categories/
+- title: 项目
+  url: /projects/
+- title: 关于
+  url: /about/
+- title: 搜索
+  url: /search/
+
+navigation_footer:
+- title: "© 2023 Liyck 版权所有"
+  url: https://liyckonline.top
+
+social_links: 
+  GitHub: https://github.com/Liyck
+  Twitter: https://twitter.com/your_twitter
+  Weibo: https://weibo.com/your_weibo
+  Email: mailto:your_email@example.com
+  RSS: /feed.xml
+
+sharing_links: 
+  Twitter: "#0d94e7"
+  Weibo: "#e6162d"
+  Email: true
+
+# 中文字体支持
+fonts:
+  preconnect_urls:
+    - https://fonts.gstatic.com
+  font_urls:
+    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap
+
+# 评论系统配置 (示例使用Gitalk)
+comments:
+  provider: gitalk
+  gitalk:
+    clientID: YOUR_GITHUB_CLIENT_ID
+    clientSecret: YOUR_GITHUB_CLIENT_SECRET
+    repo: Liyck.github.io
+    owner: Liyck
+    admin: [Liyck]
+    
+# SEO优化设置
+seo:
+  title: true
+  description: true
+  image: "/assets/default-social-image.png"
+  locale: zh_CN
+  twitter:
+    username: your_twitter
