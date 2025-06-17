@@ -6,7 +6,7 @@ categories: [技术]
 tags: [Jekyll, Markdown]
 excerpt: "开始吧，我的blog"
 feature_text: |
-  ## The Pot Still
+  ## XDG
   "你很好，只是偶然被需要"
 feature_image: "https://picsum.photos/2560/600?image=733"
 image: "https://picsum.photos/2560/600?image=733"
