@@ -15,21 +15,13 @@ permalink: /search/
       <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
       </svg>
-      <input type="text" id="search-input" placeholder="输入关键词搜索文章..." autocomplete="off">
+      <input type="text" id="search-input" placeholder="输入关键词搜索文章..." autocomplete="off" />
       <button type="button" id="search-button">
         <span>搜索</span>
         <svg class="search-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
           <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
         </svg>
       </button>
-    </div>
-    
-    <div class="search-tags">
-      <span>热门搜索：</span>
-      <a href="#" class="search-tag" data-search="前端开发">前端开发</a>
-      <a href="#" class="search-tag" data-search="JavaScript">JavaScript</a>
-      <a href="#" class="search-tag" data-search="CSS">CSS</a>
-      <a href="#" class="search-tag" data-search="React">React</a>
     </div>
   </div>
   
@@ -46,7 +38,7 @@ permalink: /search/
         <path fill="#6c757d" d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1 1.1-.49 1.1-1.1-.49-1.1-1.1-1.1z"/>
       </svg>
       <h3>未找到相关结果</h3>
-      <p>尝试使用不同的关键词或查看热门标签</p>
+      <p>尝试使用不同的关键词进行搜索</p>
     </div>
     
     <div id="search-results"></div>
@@ -54,7 +46,6 @@ permalink: /search/
 </div>
 
 <style>
-/* 设计变量 */
 :root {
   --primary-color: #3a86ff;
   --primary-hover: #2667cc;
@@ -69,14 +60,12 @@ permalink: /search/
   --transition: all 0.3s ease;
 }
 
-/* 搜索容器 */
 .search-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
-/* 标题区域 */
 .search-header {
   text-align: center;
   margin-bottom: 40px;
@@ -97,7 +86,6 @@ permalink: /search/
   line-height: 1.6;
 }
 
-/* 搜索框区域 */
 .search-box {
   margin-bottom: 40px;
 }
@@ -111,6 +99,7 @@ permalink: /search/
   overflow: hidden;
   border: 1px solid var(--border-color);
   transition: var(--transition);
+  height: 48px; /* 固定高度，保证输入框和按钮高度一致 */
 }
 
 .search-input-container:focus-within {
@@ -120,20 +109,28 @@ permalink: /search/
 
 .search-icon {
   position: absolute;
-  left: 20px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-lighter);
   z-index: 1;
+  width: 24px;
+  height: 24px;
 }
 
 #search-input {
   flex: 1;
-  padding: 18px 20px 18px 56px;
+  padding: 0 20px 0 56px;
   border: none;
   font-size: 1.1rem;
   background: transparent;
   color: var(--text-color);
+  height: 100%;
+  line-height: 48px;
+}
+
+#search-input::placeholder {
+  color: var(--text-lighter);
 }
 
 #search-input:focus {
@@ -151,6 +148,7 @@ permalink: /search/
   font-size: 1.1rem;
   font-weight: 600;
   transition: var(--transition);
+  height: 100%;
 }
 
 #search-button:hover {
@@ -166,43 +164,11 @@ permalink: /search/
   transform: translateX(3px);
 }
 
-/* 热门标签 */
-.search-tags {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  gap: 8px;
-}
-
-.search-tags span {
-  color: var(--text-light);
-  font-size: 0.95rem;
-}
-
-.search-tag {
-  display: inline-block;
-  padding: 6px 14px;
-  background: rgba(58, 134, 255, 0.1);
-  color: var(--primary-color);
-  border-radius: 30px;
-  font-size: 0.95rem;
-  transition: var(--transition);
-  text-decoration: none;
-}
-
-.search-tag:hover {
-  background: rgba(58, 134, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-/* 结果容器 */
 .search-results-container {
   position: relative;
   min-height: 300px;
 }
 
-/* 状态信息 */
 .search-status {
   display: flex;
   flex-direction: column;
@@ -215,10 +181,7 @@ permalink: /search/
   box-shadow: var(--shadow);
 }
 
-#search-loading {
-  display: none;
-}
-
+#search-loading,
 #no-results {
   display: none;
 }
@@ -237,7 +200,6 @@ permalink: /search/
   margin: 0;
 }
 
-/* 加载动画 */
 .spinner {
   width: 50px;
   height: 50px;
@@ -253,7 +215,6 @@ permalink: /search/
   100% { transform: rotate(360deg); }
 }
 
-/* 搜索结果项 */
 .search-result {
   margin-bottom: 25px;
   padding: 25px;
@@ -309,7 +270,6 @@ permalink: /search/
   margin-bottom: 0;
 }
 
-/* 高亮样式 */
 mark {
   background-color: #fffd54;
   padding: 0 4px;
@@ -325,7 +285,6 @@ mark {
   border-bottom: 1px solid var(--border-color);
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
   .search-container {
     padding: 20px 15px;
@@ -337,14 +296,20 @@ mark {
   
   .search-input-container {
     flex-direction: column;
+    height: auto;
+  }
+  
+  #search-input {
+    padding: 12px 20px 12px 56px;
+    line-height: normal;
+    height: 48px;
   }
   
   #search-button {
-    padding: 15px;
-    justify-content: center;
-  }
-  
-  .search-tags {
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 8px;
+    height: 48px;
     justify-content: center;
   }
   
@@ -361,7 +326,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchResults = document.getElementById('search-results');
     const searchLoading = document.getElementById('search-loading');
     const noResults = document.getElementById('no-results');
-    const searchTags = document.querySelectorAll('.search-tag');
     
     let searchData = [];
     
@@ -387,10 +351,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // 显示搜索历史
-        saveSearchHistory(query);
-        
-        // 显示加载状态
         searchLoading.style.display = 'flex';
         noResults.style.display = 'none';
         searchResults.innerHTML = '';
@@ -491,33 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
-    
-    // 保存搜索历史
-    function saveSearchHistory(query) {
-        const searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-        
-        // 避免重复
-        if (!searchHistory.includes(query)) {
-            searchHistory.unshift(query);
-            
-            // 最多保存5条
-            if (searchHistory.length > 5) {
-                searchHistory.pop();
-            }
-            
-            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-        }
-    }
-    
-    // 标签搜索功能
-    searchTags.forEach(tag => {
-        tag.addEventListener('click', (e) => {
-            e.preventDefault();
-            const searchTerm = tag.getAttribute('data-search');
-            searchInput.value = searchTerm;
-            performSearch();
-        });
-    });
     
     // 事件监听
     searchButton.addEventListener('click', performSearch);
