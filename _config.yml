@@ -137,9 +137,21 @@ comments:
     owner: Liyck
     admin: [Liyck]
 
-# 13. SEO settings
-seo:
-  title: true
-  description: true
-  image: "/assets/default-social-image.png"
-  locale: zh_CN
+# 代码高亮配置
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    block:
+      line_numbers: true
+
+# 添加代码字体
+fonts:
+  preconnect_urls:
+    - https://fonts.gstatic.com
+  font_urls:
+    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
+
+# 优化摘要分隔符
+excerpt_separator: <!-- excerpt -->
+
