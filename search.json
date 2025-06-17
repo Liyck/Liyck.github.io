@@ -16,6 +16,14 @@ permalink: /search.json
         | strip_newlines 
         | normalize_whitespace 
         | jsonify 
+      }},
+      "title_content": {{ 
+        post.title | append: " " | append: post.content 
+        | markdownify 
+        | strip_html 
+        | strip_newlines 
+        | normalize_whitespace 
+        | jsonify 
       }}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
