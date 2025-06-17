@@ -4,11 +4,13 @@ title: "我的第一篇博客"
 date: 2025-06-16 10:00:00 +0800
 categories: [技术]
 tags: [Jekyll, Markdown]
-excerpt: "xdg：你很好，只是偶然被需要"
+excerpt: "开始吧，我的blog"
+feature_text: |
+  ## The Pot Still
+  你很好，只是偶然被需要
 feature_image: "https://picsum.photos/2560/600?image=733"
 image: "https://picsum.photos/2560/600?image=733"
 ---
-
 
 这里是文章的正文内容，可以用 Markdown 语法写。
 
