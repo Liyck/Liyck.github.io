@@ -14,3 +14,7 @@ permalink: /search.json
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
+
+文章数量: {{ site.posts.size }}
+文章列表: {{ site.posts | inspect }}
+
