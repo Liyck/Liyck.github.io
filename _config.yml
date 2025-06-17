@@ -12,6 +12,12 @@ exclude:
   - Gemfile.lock
   - alembic-jekyll-theme.gemspec
   - .jekyll-cache
+  - .sass-cache
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
 
 # 2. Plugins
 plugins:
@@ -19,7 +25,6 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-redirect-from
-  - jekyll-feed
   - jekyll-commonmark
   - jekyll-include-cache
   # - jekyll-mentions
@@ -39,8 +44,9 @@ social:
 sass:
   style: compressed
 permalink: pretty
-excerpt_separator: <!-- more -->
+excerpt_separator: <!-- excerpt -->
 timezone: Asia/Shanghai
+incremental: true  # 启用增量构建，提高性能
 
 # 5. Collections
 collections:
@@ -67,6 +73,11 @@ defaults:
       type: "pages"
     values:
       layout: page
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+      image_lazy: true  # 延迟加载图片
 
 # 7. Site info
 encoding: utf-8
@@ -115,17 +126,13 @@ navigation_footer:
 # 10. Social & sharing links (GitHub only)
 social_links:
   GitHub: https://github.com/Liyck
-  RSS: /feed.xml
-
-sharing_links:
-  RSS: true
 
 # 11. Font support
 fonts:
   preconnect_urls:
     - https://fonts.gstatic.com
   font_urls:
-    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap
+    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
 
 # 12. Comments (Gitalk example)
 comments:
@@ -145,13 +152,21 @@ kramdown:
     block:
       line_numbers: true
 
-# 添加代码字体
-fonts:
-  preconnect_urls:
-    - https://fonts.gstatic.com
-  font_urls:
-    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
+# 高级SEO设置
+seo:
+  type: WebSite
+  links:
+    - https://github.com/Liyck
+  name_format: "%s | Liyck的技术博客"
 
-# 优化摘要分隔符
-excerpt_separator: <!-- excerpt -->
+# 静态资源缓存配置
+static_files_config:
+  cache_control: "public, max-age=86400"
 
+# 环境特定配置
+development:
+  show_drafts: true
+  verbose: true
+production:
+  show_drafts: false
+  verbose: false
