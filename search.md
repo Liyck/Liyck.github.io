@@ -92,6 +92,18 @@ mark {
   background-color: #fffd54;
   padding: 0 2px;
 }
+
+#search-debug {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  display: none;
+}
 </style>
 
 <script>
@@ -117,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('搜索数据加载完成，共加载 ' + data.length + ' 篇文章');
             if (data.length > 0) {
                 console.log('第一篇文章标题: ' + data[0].title);
+                console.log('标题内容组合: ' + data[0].title_content.substring(0, 100) + '...');
             }
             searchData = data;
         })
@@ -142,17 +155,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // 设置延迟以显示加载状态
         setTimeout(() => {
             const queryTerms = query.split(/\s+/).filter(term => term.length > 0);
+            console.log('搜索关键词:', queryTerms);
             
             const results = searchData.filter(post => {
-                // 组合所有搜索字段
-                const text = (
-                    post.title.toLowerCase() + " " + 
-                    post.content.toLowerCase()
+                // 检查标题匹配 - 优先匹配标题
+                const titleMatch = post.title.toLowerCase().includes(query);
+                if (titleMatch) return true;
+                
+                // 检查组合字段匹配
+                const combinedMatch = queryTerms.every(term => 
+                    post.title_content.toLowerCase().includes(term)
                 );
                 
-                // 检查所有查询词是否出现
-                return queryTerms.every(term => text.includes(term));
+                return combinedMatch;
             });
+            
+            console.log('找到结果数量:', results.length);
             
             searchLoading.style.display = 'none';
             
@@ -167,11 +185,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // 显示搜索结果
     function displayResults(results, queryTerms) {
         const resultsHtml = results.map(post => {
+            // 检查是否标题匹配
+            const isTitleMatch = post.title.toLowerCase().includes(
+                queryTerms.join(' ').toLowerCase()
+            );
+            
             // 高亮标题
             const highlightedTitle = highlightText(post.title, queryTerms);
             
-            // 生成内容摘要（包含高亮）
-            const contentExcerpt = generateExcerpt(post.content, queryTerms);
+            // 生成内容摘要（优先显示标题匹配的内容）
+            let contentExcerpt;
+            if (isTitleMatch) {
+                // 如果是标题匹配，显示文章开头
+                contentExcerpt = generateExcerpt(post.content, 0, 200);
+            } else {
+                // 否则显示关键词周围的上下文
+                contentExcerpt = generateExcerpt(post.title_content, queryTerms);
+            }
             
             return `
                 <div class="search-result">
@@ -187,42 +217,54 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 高亮匹配文本
     function highlightText(text, terms) {
+        let result = text;
         terms.forEach(term => {
             const regex = new RegExp(escapeRegExp(term), 'gi');
-            text = text.replace(regex, '<mark>$&</mark>');
+            result = result.replace(regex, match => `<mark>${match}</mark>`);
         });
-        return text;
+        return result;
     }
     
     // 生成包含关键词的摘要
-    function generateExcerpt(content, terms, length = 200) {
-        // 寻找最佳匹配位置
-        let bestIndex = -1;
-        let maxMatches = 0;
+    function generateExcerpt(content, termsOrPosition, length = 200) {
+        if (!content) return '';
         
-        terms.forEach(term => {
-            const index = content.toLowerCase().indexOf(term.toLowerCase());
+        // 如果第二个参数是数字，表示从该位置开始截取
+        if (typeof termsOrPosition === 'number') {
+            const start = termsOrPosition;
+            const end = Math.min(content.length, start + length);
+            let excerpt = content.substring(start, end);
+            if (end < content.length) excerpt += '...';
+            return excerpt;
+        }
+        
+        // 否则处理关键词匹配
+        const terms = termsOrPosition;
+        const contentLower = content.toLowerCase();
+        
+        // 寻找第一个匹配的关键词位置
+        let bestIndex = -1;
+        for (const term of terms) {
+            const index = contentLower.indexOf(term.toLowerCase());
             if (index !== -1) {
                 bestIndex = index;
+                break;
             }
-        });
-        
-        let excerpt = '';
-        
-        if (bestIndex !== -1) {
-            // 以匹配词为中心截取内容
-            const start = Math.max(0, bestIndex - length/2);
-            const end = Math.min(content.length, bestIndex + terms[0].length + length/2);
-            excerpt = content.substring(start, end);
-            
-            // 添加省略号
-            if (start > 0) excerpt = '...' + excerpt;
-            if (end < content.length) excerpt += '...';
-        } else {
-            // 没有匹配词时截取开头
-            excerpt = content.substring(0, length);
-            if (content.length > length) excerpt += '...';
         }
+        
+        if (bestIndex === -1) {
+            // 没有关键词匹配时返回开头
+            return content.substring(0, length) + (content.length > length ? '...' : '');
+        }
+        
+        // 以匹配词为中心截取内容
+        const start = Math.max(0, bestIndex - length/2);
+        const end = Math.min(content.length, bestIndex + terms[0].length + length/2);
+        let excerpt = content.substring(start, end);
+        
+        // 添加省略号
+        if (start > 0) excerpt = '...' + excerpt;
+        if (end < content.length) excerpt += '...';
         
         // 高亮所有查询词
         return highlightText(excerpt, terms);
