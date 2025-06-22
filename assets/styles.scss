@@ -1,353 +1,71 @@
 ---
 ---
 
-// 导入 Alembic 主题基础样式
+// ===================================
+// 明亮自然主题 - 自定义样式
+// ===================================
+
+// 1. 导入Alembic主题基础样式
 @import "alembic";
 
-// 自然明亮主题配色变量
-$primary-color: #2E8B57;        // 海绿色 - 主色调
-$secondary-color: #87CEEB;      // 天空蓝 - 辅助色  
-$accent-color: #FFD700;         // 暖金色 - 强调色
-$background-color: #F5F5DC;     // 米色 - 背景
-$text-color: #2F4F4F;          // 深灰绿 - 正文
-$heading-color: #228B22;        // 森林绿 - 标题
-$link-color: #4682B4;          // 钢蓝色 - 链接
-$border-color: #C0C0C0;        // 银色 - 边框
+// ===================================
+// 2. CSS变量定义 - 明亮自然色彩系统
+// ===================================
+:root {
+  // 主要颜色系统
+  --primary-color: #2E8B57;        // 海绿色
+  --secondary-color: #87CEEB;      // 天空蓝
+  --accent-color: #FFD700;         // 暖金色
+  --success-color: #28a745;        // 成功绿
+  --warning-color: #ffc107;        // 警告黄
+  --danger-color: #dc3545;         // 危险红
+  --info-color: #17a2b8;           // 信息蓝
+  
+  // 文字颜色系统
+  --text-color: #2F4F4F;           // 深灰绿
+  --heading-color: #228B22;        // 森林绿
+  --link-color: #4682B4;           // 钢蓝色
+  --link-hover-color: #2E8B57;     // 链接悬停
+  --muted-color: #6c757d;          // 次要文字
+  
+  // 背景颜色系统
+  --bg-color: #F5F5DC;             // 米色主背景
+  --content-bg: #FFFFFF;           // 内容区背景
+  --card-bg: #FDFDFD;              // 卡片背景
+  --code-bg: #F8F9FA;              // 代码背景
+  --border-color: #E8E8E8;         // 边框颜色
+  
+  // 阴影和效果
+  --shadow-light: 0 2px 8px rgba(46, 139, 87, 0.1);
+  --shadow-medium: 0 4px 16px rgba(46, 139, 87, 0.15);
+  --shadow-heavy: 0 8px 32px rgba(46, 139, 87, 0.2);
+  
+  // 间距和尺寸
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+}
 
-// 悬停效果颜色
-$link-hover-color: #2E8B57;
-$button-hover-color: #228B22;
-
-// 整体页面背景 - 明亮自然渐变
+// ===================================
+// 3. 页面背景和基础样式
+// ===================================
 body {
-  background: linear-gradient(135deg, #F0F8FF 0%, #F5F5DC 100%);
-  color: $text-color;
-  font-family: 'Segoe UI', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
-}
-
-// 头部导航优化 - 毛玻璃效果
-.header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 2px solid $primary-color;
-  box-shadow: 0 2px 10px rgba(46, 139, 87, 0.1);
-  
-  .navigation {
-    a {
-      color: $text-color;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      
-      &:hover {
-        color: $primary-color;
-      }
-    }
-  }
-}
-
-// 主要内容区域
-.main {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  margin: 2rem auto;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-// 标题样式优化
-h1, h2, h3, h4, h5, h6 {
-  color: $heading-color;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-h1 {
-  color: $primary-color;
-  border-bottom: 3px solid $accent-color;
-  padding-bottom: 0.5rem;
-}
-
-// 文章卡片样式
-.post-item,
-.post {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  border-left: 4px solid $primary-color;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.15);
-  }
-}
-
-// 链接样式
-a {
-  color: $link-color;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  
-  &:hover {
-    color: $link-hover-color;
-    text-decoration: underline;
-  }
-}
-
-// 按钮样式
-.btn,
-button {
-  background: linear-gradient(45deg, $primary-color, $secondary-color);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 20px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  
-  &:hover {
-    background: linear-gradient(45deg, $button-hover-color, $primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
-  }
-}
-
-// 代码块美化
-.highlighter-rouge,
-pre {
-  background: rgba(47, 79, 79, 0.05);
-  border: 1px solid $border-color;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem 0;
-  overflow-x: auto;
-  
-  code {
-    color: $heading-color;
-    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-    background: transparent;
-  }
-}
-
-// 行内代码
-code {
-  background: rgba(46, 139, 87, 0.1);
-  color: $primary-color;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-  font-size: 0.9em;
-}
-
-// 引用块样式
-blockquote {
-  border-left: 4px solid $accent-color;
-  background: rgba(255, 215, 0, 0.1);
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: $text-color;
-  border-radius: 0 8px 8px 0;
-}
-
-// 表格样式
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1.5rem 0;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  overflow: hidden;
-  
-  th {
-    background: $primary-color;
-    color: white;
-    padding: 1rem;
-    text-align: left;
-  }
-  
-  td {
-    padding: 1rem;
-    border-bottom: 1px solid $border-color;
-  }
-  
-  tr:hover {
-    background: rgba(46, 139, 87, 0.05);
-  }
-}
-
-// 页脚优化
-.footer {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 2px solid $primary-color;
-  color: $text-color;
-  padding: 2rem 0;
-  margin-top: 3rem;
-}
-
-// 首页特色区域
-.feature {
-  background: linear-gradient(
-    rgba(46, 139, 87, 0.8),
-    rgba(135, 206, 235, 0.8)
+  background: linear-gradient(135deg, 
+    #F0F8E8 0%,     // 浅绿
+    #E8F4FD 25%,    // 浅蓝
+    #FFF8DC 50%,    // 玉米色
+    #F0FFFF 75%,    // 天蓝色
+    #F5F5DC 100%    // 米色
   );
-  color: white;
-  border-radius: 15px;
-  padding: 3rem 2rem;
-  margin: 2rem 0;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  
-  h1, h2, h3 {
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: var(--text-color);
+  font-family: "Noto Sans SC", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  min-height: 100vh;
 }
 
-// 搜索框样式
-.search {
-  input {
-    border: 2px solid $border-color;
-    border-radius: 25px;
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-    
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
-    }
-  }
-}
-
-// 标签样式
-.tag,
-.label {
-  background: linear-gradient(45deg, $primary-color, $secondary-color);
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  margin: 0.2rem;
-  display: inline-block;
-  text-decoration: none;
-  
-  &:hover {
-    background: linear-gradient(45deg, $button-hover-color, $primary-color);
-    color: white;
-  }
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-  body {
-    background: $background-color; // 移动端使用纯色背景，提升性能
-  }
-  
-  .main {
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-  
-  .post-item,
-  .post {
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-  }
-  
-  .feature {
-    padding: 2rem 1rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-}
-
-// 小屏幕优化
-@media (max-width: 480px) {
-  .header {
-    padding: 1rem;
-  }
-  
-  .main {
-    margin: 0.5rem;
-    padding: 1rem;
-  }
-  
-  .btn,
-  button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-}
-
-// 深色模式支持（可选）
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: #e0e0e0;
-  }
-  
-  .main {
-    background: rgba(40, 40, 60, 0.9);
-  }
-  
-  .header,
-  .footer {
-    background: rgba(40, 40, 60, 0.95);
-  }
-}
-
-// 动画效果
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.post-item,
-.post {
-  animation: fadeIn 0.6s ease-out;
-}
-
-// 滚动条美化（webkit浏览器）
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $primary-color;
-  border-radius: 4px;
-  
-  &:hover {
-    background: $button-hover-color;
-  }
-}
+@keyframes gradi
