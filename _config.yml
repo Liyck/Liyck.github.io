@@ -1,8 +1,6 @@
-# ===================================
-# Jekyll 站点配置 - 明亮自然主题优化版
-# ===================================
+# Site configuration for Jekyll
 
-# 1. 基础文件排除配置
+# 1. Exclude unnecessary files
 exclude:
   - README.md
   - CODE_OF_CONDUCT.md
@@ -20,9 +18,8 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - deploy-theme.sh
 
-# 2. Jekyll 插件配置
+# 2. Plugins
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
@@ -30,80 +27,146 @@ plugins:
   - jekyll-redirect-from
   - jekyll-commonmark
   - jekyll-include-cache
-  - jekyll-feed
   # - jekyll-mentions
   # - jemoji
 
-# 3. 插件设置
-paginate: 8  # 每页显示8篇文章，更适合卡片布局
+# 3. Plugin Settings
+paginate: 10
 paginate_path: blog/page:num
-feed:
-  posts_limit: 20
-  excerpt_only: true
 
-# 4. 作者和社交信息
-author: 
-  name: "二进制手"
-  email: ""
-  bio: "专注于二进制分析、逆向工程和系统底层技术"
-  avatar: "/assets/images/avatar.jpg"
-  location: "中国"
-
+author: Liyck
 social:
-  name: "二进制手"
+  name: Liyck
   links:
     - https://github.com/Liyck
-    - https://liyckonline.top
 
-# 5. Jekyll 构建设置
+# 4. Jekyll settings
 sass:
   style: compressed
-  sass_dir: _sass
-  sourcemap: development
 permalink: pretty
 excerpt_separator: <!-- excerpt -->
 timezone: Asia/Shanghai
-incremental: false  # 建议生产环境关闭增量构建
-future: false
-unpublished: false
+incremental: true  # 启用增量构建，提高性能
 
-# 6. Markdown 和代码高亮配置
-markdown: kramdown
-highlighter: rouge
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    css_class: 'highlight'
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
-
-# 7. 集合配置
+# 5. Collections
 collections:
   posts:
-    title: "技术文章"
+    title: 文章
     output: true
-    description: "二进制分析、逆向工程与系统底层技术探索"
-    feature_text: |
-      ## 欢迎来到二进制手的技术博客
-      专注于二进制分析、逆向工程、系统底层和安全技术分享
-      探索计算机底层世界的奥秘
-    feature_image: "/assets/images/hero-banner.jpg"
-  projects:
-    title: "开源项目"
-    output: true
-    description: "个人开源项目和技术实验"
+    description: "技术探索与生活思考"
+    feature_text: "欢迎来到我的博客"
+    feature_image: "/assets/images/banner.jpg"
 
-# 8. 默认设置
+# 6. Defaults
 defaults:
   - scope:
       path: ""
     values:
-      layout: default
-      image: "/assets/images/default-social.jpg"
-      author: "二进制手"
+      image: "/assets/default-social-image.png"
   - scope:
-   
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+      image_lazy: true  # 延迟加载图片
+
+# 7. Site info
+encoding: utf-8
+lang: zh-CN
+locale: zh_CN
+title: "Liyck的技术博客"
+description: "分享编程技术、开发经验和生活感悟的个人博客"
+logo: "/assets/logos/logo.svg"
+url: "https://liyckonline.top"
+baseurl: ""
+repo: "https://github.com/Liyck/Liyck.github.io"
+email: ""  # 已清空
+date_format: "%Y年%-m月%-d日"
+css_inline: true
+
+# 8. Favicon
+favicons:
+  16: '/assets/logos/logo@16px.png'
+  32: '/assets/logos/logo@32px.png'
+  96: '/assets/logos/logo@96px.png'
+  120: '/assets/logos/logo@120px.png'
+  144: '/assets/logos/logo@144px.png'
+  180: '/assets/logos/logo@180px.png'
+  512: '/assets/logos/logo@512px.png'
+  1024: '/assets/logos/logo@1024px.png'
+
+# 9. Navigation
+navigation_header:
+  - title: 首页
+    url: /
+  - title: 博客
+    url: /blog/
+  - title: 分类
+    url: /categories/
+  - title: 项目
+    url: /projects/
+  - title: 关于
+    url: /about/
+  - title: 搜索
+    url: /search/
+
+navigation_footer:
+  - title: "© 2023 Liyck 版权所有"
+    url: https://liyckonline.top
+
+# 10. Social & sharing links (GitHub only)
+social_links:
+  GitHub: https://github.com/Liyck
+
+# 11. Font support
+fonts:
+  preconnect_urls:
+    - https://fonts.gstatic.com
+  font_urls:
+    - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
+
+# 12. Comments (Gitalk example)
+comments:
+  provider: gitalk
+  gitalk:
+    clientID: YOUR_GITHUB_CLIENT_ID
+    clientSecret: YOUR_GITHUB_CLIENT_SECRET
+    repo: Liyck.github.io
+    owner: Liyck
+    admin: [Liyck]
+
+# 代码高亮配置
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    block:
+      line_numbers: true
+
+# 高级SEO设置
+seo:
+  type: WebSite
+  links:
+    - https://github.com/Liyck
+  name_format: "%s | Liyck的技术博客"
+
+# 静态资源缓存配置
+static_files_config:
+  cache_control: "public, max-age=86400"
+
+# 环境特定配置
+development:
+  show_drafts: true
+  verbose: true
+production:
+  show_drafts: false
+  verbose: false
