@@ -60,7 +60,7 @@ image: "https://picsum.photos/2560/600?image=733"
 > sh.interactive()
 > ```
 
-> ![image](\2025-08-01-my-second-post.assets\3458477-20250416202250958-426312344.png)
+> ![image](/assets/image /2025-08-01-my-second-post.assets/3458477-20250416202250958-426312344.png)
 
 > ```python
 > # python3脚本
@@ -460,7 +460,7 @@ shellcode += """
 
 接下来看shellcode怎么写。
 
-![image](\2025-08-01-my-second-post.assets\3458477-20250416202329599-36135792.png)
+![image](/assets/image /2025-08-01-my-second-post.assets/3458477-20250416202329599-36135792.png)
 
 现在假设flag已经读到了栈上，但是没有办法读（没有系统调用 & close(1)）。
 
@@ -492,7 +492,7 @@ shellcode += """
 >
 > shellcode为读取文件的code。
 
-![image](\2025-08-01-my-second-post.assets\3458477-20250416202339098-646922745.png)
+![image](/assets/image /2025-08-01-my-second-post.assets/3458477-20250416202339098-646922745.png)
 
 > 很慢，但可行。
 
@@ -731,13 +731,13 @@ shellcode = b'AW\xb9\x1e\x00\x00\x00AVAUE1\xedATD\x89\xe8USH\x83\xechH\x8d|$\xf0
 
 #### 御网杯半决赛线下
 
-![image-20250717222541764](\2025-08-01-my-second-post.assets\image-20250717222541764.png)
+![image-20250717222541764](/assets/image /2025-08-01-my-second-post.assets/image-20250717222541764.png)
 
 虽然保护全开，但是mmap把写入地方的权限改成可读可写可执行了，问题就是沙盒把orw和execve全禁了
 
 
 
-![image-20250717222830814](\2025-08-01-my-second-post.assets\image-20250717222830814.png)
+![image-20250717222830814](/assets/image /2025-08-01-my-second-post.assets/image-20250717222830814.png)
 
 
 
