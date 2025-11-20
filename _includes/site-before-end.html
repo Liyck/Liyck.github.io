@@ -1,1 +1,10 @@
 <!-- Overwrite this file with code you want before the closing body tag -->
+<!-- 阅读进度条 -->
+<script>
+document.addEventListener("scroll", function () {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollTop = document.documentElement.scrollTop;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById("reading-progress").style.width = progress + "%";
+});
+</script>
