@@ -43,6 +43,38 @@ body {
   margin-top: 1.5em;
 }
 
+/* =========================================
+   修复：移除标题及元信息链接上的双重下划线
+   ========================================= */
+
+/* 1. 强制移除主标题链接上的所有下划线/边框 */
+.article--post h1 a, 
+.article--post h1 .typeset a {
+    text-decoration: none !important; /* 移除 text-decoration (例如蓝线) */
+    border: none !important;          /* 移除 border-bottom (例如绿线) */
+    box-shadow: none !important;      /* 移除可能存在的 box-shadow 装饰 */
+    color: #0f172a !important;        /* 确保标题文字颜色为深黑色，而不是链接蓝 */
+}
+
+/* 2. 移除文章元信息 (Category/Date) 链接上的下划线/边框 */
+/* 假设元信息包含在 .post-meta 或 .article--post > p 标签中 */
+.post-meta a, 
+.article--post > p a {
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #64748b !important; /* 保持低调的灰色作为链接颜色 */
+    padding-bottom: 0 !important;
+}
+
+/* 3. 确保悬停时也不出现下划线 */
+.article--post h1 a:hover,
+.post-meta a:hover {
+    border: none !important;
+    text-decoration: none !important;
+    opacity: 0.9;
+}
+
 /* ==========================================================================
    2. 代码块终极美化 (Mac Terminal Style + 滚动条修复)
    ========================================================================== */
