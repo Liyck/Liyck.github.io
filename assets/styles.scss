@@ -1,6 +1,16 @@
 ---
 title: false
 styles: true
+/* 阅读进度条 */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background: #3498db;   // 自适配现有主题色（自己改成你主题的主色）
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
 ---
-
 @import "alembic";
