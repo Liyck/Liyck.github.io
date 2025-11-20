@@ -25,5 +25,42 @@ styles: true
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   }
 }
+/* 按钮动画 */
+button, .btn, .button {
+  padding: 0.55rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  &:active {
+    transform: translateY(0px);
+    box-shadow: none;
+  }
+}
+/* 全局字体优化 */
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  line-height: 1.75;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 段落间距优化 */
+p {
+  margin: 1.1rem 0;
+}
+
+/* 标题优化 */
+h1, h2, h3 {
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
 ---
 @import "alembic";
