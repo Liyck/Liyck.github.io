@@ -5,19 +5,19 @@ styles: true
 
 @import "alembic";
 
-/* 阅读进度条 */
+/* ----------------- 阅读进度条 ----------------- */
 #reading-progress {
   position: fixed;
   top: 0;
   left: 0;
   height: 4px;
   width: 0%;
-  background: #3498db;   // 改成你的主题色
+  background: #3498db;  // 主题主色
   z-index: 9999;
   transition: width 0.1s linear;
 }
 
-/* 文章卡片动画效果 */
+/* ----------------- 文章卡片动画 ----------------- */
 .post-list-item {
   padding: 1.2rem;
   border-radius: 10px;
@@ -31,7 +31,7 @@ styles: true
   }
 }
 
-/* 按钮动画 */
+/* ----------------- 按钮动画 ----------------- */
 button, .btn, .button {
   padding: 0.55rem 1.2rem;
   border-radius: 6px;
@@ -50,21 +50,62 @@ button, .btn, .button {
   }
 }
 
-/* 全局字体优化 */
+/* ----------------- 全局字体优化 ----------------- */
 body {
   font-family: 'Noto Sans SC', sans-serif;
   line-height: 1.75;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
+  color: #333;
 }
 
-/* 段落间距优化 */
+/* ----------------- 段落 & 标题优化 ----------------- */
 p {
-  margin: 1.1rem 0;
+  margin: 1.2rem 0;
 }
 
-/* 标题优化 */
-h1, h2, h3 {
+h1, h2, h3, h4 {
   letter-spacing: 0.5px;
   font-weight: 600;
+}
+
+/* ----------------- 代码块优化 ----------------- */
+div.highlighter-rouge, figure.highlight {
+  margin-bottom: 1.6rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+div.highlighter-rouge pre, figure.highlight > pre {
+  background-color: #f8f8f8;
+  padding: 1rem 1.2rem;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.95rem;
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 4;
+  -webkit-overflow-scrolling: touch;
+}
+
+div.highlighter-rouge code, figure.highlight code {
+  color: #333;
+}
+
+/* Rouge token 简单高亮 */
+.highlight .c { color: #888; font-style: italic; }      /* 注释 */
+.highlight .k { color: #005cc5; }                        /* 关键字 */
+.highlight .s { color: #032f62; }                        /* 字符串 */
+.highlight .mi, .highlight .mf { color: #005cc5; }      /* 数字 */
+.highlight .nb { color: #d73a49; }                       /* 内建函数 */
+
+/* 行内代码优化 */
+p code, li code, span.code-inline {
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95em;
 }
