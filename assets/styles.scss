@@ -13,13 +13,14 @@ styles: true
   --text-main: #334155;           /* 深蓝灰 */
   --code-bg: #282c34;             /* 代码块背景 */
   --scrollbar-thumb: #4b5263;     /* 滚动条滑块色 */
+  --site-width: 1100px;           /* 自定义页面宽度 */
 }
 
 body {
   font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.8;
   color: var(--text-main);
-  background-color: #f9fafb;      /* 极淡的灰背景，更护眼 */
+  background-color: #f9fafb;
 }
 
 /* 文章内链接美化 */
@@ -52,13 +53,13 @@ div.highlighter-rouge, div.highlighter-rouge pre, figure.highlight pre {
     font-family: 'JetBrains Mono', Consolas, Monaco, monospace !important;
 }
 
-/* 2.2 外层容器：禁止滚动，只负责背景和圆角 (修复双滚动条的关键) */
+/* 2.2 外层容器：禁止滚动，只负责背景和圆角 */
 div.highlighter-rouge, figure.highlight, .highlight {
     background-color: var(--code-bg) !important;
     border-radius: 12px;
     margin: 2rem 0 !important;
     position: relative;
-    overflow: hidden !important; /* 核心：禁止外层出现滚动条 */
+    overflow: hidden !important; /* 禁止外层滚动 */
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border: 1px solid #21252b;
 }
@@ -73,31 +74,31 @@ div.highlighter-rouge::before, figure.highlight::before, .highlight::before {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #ff5f56; /* 红 */
-    box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #27c93f; /* 黄 + 绿 */
+    background: #ff5f56;
+    box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #27c93f;
     z-index: 10;
 }
 
-/* 2.4 内部区域：允许横向滚动，去除背景 */
+/* 2.4 内部区域：允许横向滚动 */
 div.highlighter-rouge pre, figure.highlight pre, .highlight pre {
     background: transparent !important;
     margin: 0 !important;
-    padding: 50px 20px 20px 20px !important; /* 顶部留出空间给三个点 */
-    overflow-x: auto !important; /* 核心：只在这里允许滚动 */
+    padding: 50px 20px 20px 20px !important;
+    overflow-x: auto !important; /* 允许横向滚动 */
     overflow-y: hidden !important;
     border: none !important;
-    color: #abb2bf !important; /* 代码文字颜色 */
+    color: #abb2bf !important;
     font-size: 0.9rem;
     line-height: 1.6;
     width: 100%;
 }
 
-/* 2.5 修复：强制去除代码里每个 span 的背景色块 */
+/* 2.5 修复背景色块 */
 div.highlighter-rouge span, figure.highlight span, code span {
     background-color: transparent !important; 
 }
 
-/* 2.6 表格修复 (针对带行号的代码块) */
+/* 2.6 表格修复 */
 div.highlighter-rouge table, figure.highlight table {
     border: none !important;
     margin: 0 !important;
@@ -108,24 +109,23 @@ div.highlighter-rouge td, figure.highlight td {
     padding: 0 !important;
 }
 
-/* 2.7 滚动条美化 (Webkit - 解决白色滚动条问题) */
+/* 2.7 滚动条美化 */
 div.highlighter-rouge pre::-webkit-scrollbar,
 figure.highlight pre::-webkit-scrollbar {
     height: 8px;
-    background-color: var(--code-bg); /* 轨道颜色与背景一致 */
+    background-color: var(--code-bg);
 }
 div.highlighter-rouge pre::-webkit-scrollbar-thumb,
 figure.highlight pre::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb); /* 深灰滑块 */
+    background-color: var(--scrollbar-thumb);
     border-radius: 4px;
     border: 2px solid var(--code-bg);
 }
-/* 隐藏滚动条按钮 (去除 < > 箭头) */
 div.highlighter-rouge pre::-webkit-scrollbar-button {
     display: none;
 }
 
-/* 2.8 行内代码 (Inline Code) */
+/* 2.8 行内代码 */
 p code, li code, span.code-inline {
     background-color: rgba(255, 95, 86, 0.1) !important;
     color: #c7254e !important;
@@ -136,9 +136,8 @@ p code, li code, span.code-inline {
 }
 
 /* ==========================================================================
-   3. 底部导航卡片美化 (Previous / Next Cards)
+   3. 底部导航卡片美化
    ========================================================================== */
-/* 容器 */
 .post-navigation-wrapper {
     display: flex;
     justify-content: space-between;
@@ -149,7 +148,6 @@ p code, li code, span.code-inline {
     flex-wrap: wrap;
 }
 
-/* 卡片主体 */
 .nav-card {
     flex: 1;
     min-width: 240px;
@@ -166,14 +164,12 @@ p code, li code, span.code-inline {
     overflow: hidden;
 }
 
-/* 悬停效果 */
 .nav-card:not(.empty):hover {
     border-color: var(--primary-color);
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
 }
 
-/* 标签 (上一篇/下一篇) */
 .nav-label {
     font-size: 0.85rem;
     color: #64748b;
@@ -184,17 +180,10 @@ p code, li code, span.code-inline {
     font-weight: 600;
 }
 
-/* SVG 图标对齐 */
-.nav-label svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* 下一篇靠右对齐 */
+.nav-label svg { width: 16px; height: 16px; }
 .nav-card.next .nav-label { justify-content: flex-end; }
 .nav-card.next .nav-title { text-align: right; }
 
-/* 文章标题 */
 .nav-title {
     font-weight: 700;
     color: #1e293b;
@@ -210,9 +199,41 @@ p code, li code, span.code-inline {
 .nav-card.empty { border: none; background: transparent; box-shadow: none; pointer-events: none; }
 
 /* ==========================================================================
-   4. 其他组件 (阅读进度条 & 按钮)
+   4. 布局宽度调整 (Layout Width Adjustment)
    ========================================================================== */
-/* 阅读进度条 */
+
+/* 4.1 核心容器拓宽 */
+.container, .main {
+    /* 这里设置你想要的宽度，通常 1100px 适合技术博客 */
+    max-width: var(--site-width) !important; 
+    width: 94% !important; /* 小屏幕左右留一点边距 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 4.2 确保导航栏内容也对齐这个宽度 */
+.site-header .container, header .container {
+    max-width: var(--site-width) !important;
+}
+
+/* 4.3 强制让文章内容撑满容器 */
+.article, .content, .typeset {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* 4.4 稍微限制一下正文段落的宽度，防止单行文字太长读着累 */
+/* 但代码块保持全宽 */
+.typeset p, .typeset ul, .typeset ol {
+    max-width: 100%; /* 如果觉得文字太长，可以改成 800px */
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* ==========================================================================
+   5. 其他组件 (阅读进度条 & 按钮)
+   ========================================================================== */
 #reading-progress {
   position: fixed;
   top: 0;
@@ -224,7 +245,6 @@ p code, li code, span.code-inline {
   transition: width 0.1s linear;
 }
 
-/* 通用按钮 */
 button, .btn, .button {
   padding: 0.6rem 1.4rem;
   border-radius: 6px;
@@ -238,7 +258,6 @@ button:hover, .btn:hover, .button:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* 文章列表卡片动画 */
 .post-list-item {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
