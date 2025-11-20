@@ -5,128 +5,190 @@ styles: true
 
 @import "alembic";
 
-/* ----------------- 阅读进度条 ----------------- */
+/* =========================================
+   1. 核心修复与全局设置
+   ========================================= */
+
+:root {
+  --primary-color: #2563eb;
+  --text-main: #334155;
+  --code-bg: #282c34; /* Mac 终端深色背景 */
+}
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.8;
+  color: var(--text-main);
+  font-size: 16px;
+  background-color: #f9fafb; /* 极淡的灰背景 */
+}
+
+/* =========================================
+   2. 代码块美化 (Mac 终端风格 + 修复高亮Bug)
+   ========================================= */
+
+/* 容器：圆角、阴影、深色背景 */
+div.highlighter-rouge, figure.highlight, .highlight {
+  background-color: var(--code-bg) !important;
+  color: #abb2bf;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 顶部装饰：模拟 Mac 窗口红黄绿三个点 */
+div.highlighter-rouge::before, figure.highlight::before, .highlight::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: #ff5f56; /* 红 */
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f; /* 黄和绿 */
+  z-index: 2;
+}
+
+/* 代码区域：留出顶部空间，强制字体 */
+div.highlighter-rouge pre, figure.highlight > pre, .highlight pre {
+  background-color: transparent !important; /* 核心修复：去除背景 */
+  padding: 50px 20px 20px 20px; /* 顶部留出50px给红黄绿点 */
+  margin: 0;
+  font-family: 'JetBrains Mono', Consolas, Monaco, monospace !important;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  border: none;
+}
+
+/* 核心修复：强制去除所有代码文字的背景色块 */
+.highlight span {
+  background-color: transparent !important;
+}
+
+/* Rouge 高亮配色微调 (Dracula 风格) */
+.highlight .c { color: #697286; font-style: italic; } /* 注释 */
+.highlight .k { color: #c678dd; } /* 关键字 purple */
+.highlight .s { color: #98c379; } /* 字符串 green */
+.highlight .nf { color: #61afef; } /* 函数 blue */
+.highlight .nb { color: #e5c07b; } /* 内建 yellow */
+.highlight .mi { color: #d19a66; } /* 数字 orange */
+
+/* 行内代码优化 (`code`) */
+p code, li code, span.code-inline {
+  background-color: rgba(27, 31, 35, 0.05);
+  color: #d73a49; /* 红色强调 */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+}
+
+/* =========================================
+   3. 修复底部的 < > 符号 (文章导航美化)
+   ========================================= */
+
+/* 针对 Alembic 主题常见的导航类名 */
+.post-navigation, .entry-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eaeaea;
+}
+
+.post-navigation a, .entry-navigation a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #555;
+  background: #fff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.post-navigation a:hover, .entry-navigation a:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* 如果那个 < > 是纯文本，我们可以用 font-size: 0 隐藏它，再重写内容 */
+/* 注意：这取决于 HTML 结构，如果上面的 CSS 没生效，可能需要更暴力的隐藏 */
+
+/* =========================================
+   4. 阅读进度条 & 卡片动画 (保留你原有的)
+   ========================================= */
+
 #reading-progress {
   position: fixed;
   top: 0;
   left: 0;
-  height: 4px;
+  height: 3px;
   width: 0%;
-  background: #3498db;  // 主题主色
+  background: linear-gradient(to right, #3498db, #2ecc71); /* 渐变色更好看 */
   z-index: 9999;
   transition: width 0.1s linear;
 }
 
-/* ----------------- 文章卡片动画 ----------------- */
 .post-list-item {
-  padding: 1.2rem;
-  border-radius: 10px;
-  transition: all 0.25s ease;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  }
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-/* ----------------- 按钮动画 ----------------- */
+.post-list-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* =========================================
+   5. 按钮与排版微调
+   ========================================= */
+
 button, .btn, .button {
-  padding: 0.55rem 1.2rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   transition: all 0.25s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-
-  &:active {
-    transform: translateY(0px);
-    box-shadow: none;
-  }
-}
-
-/* ----------------- 全局字体优化 ----------------- */
-body {
-  font-family: 'Noto Sans SC', sans-serif;
-  line-height: 1.75;
-  font-size: 17px;
-  -webkit-font-smoothing: antialiased;
-  color: #333;
-}
-
-/* ----------------- 段落 & 标题优化 ----------------- */
-p {
-  margin: 1.2rem 0;
-}
-
-h1, h2, h3, h4 {
-  letter-spacing: 0.5px;
   font-weight: 600;
 }
 
-/* ----------------- 代码块优化（修复高亮和去掉按钮） ----------------- */
-div.highlighter-rouge, figure.highlight {
-  margin-bottom: 1.6rem;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  position: relative;
+button:hover, .btn:hover, .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* 隐藏主题自带的 < > 按钮或工具栏 */
-div.highlighter-rouge .highlight-toolbar,
-figure.highlight .highlight-toolbar {
-  display: none !important;
+/* 标题优化 */
+h1, h2, h3 {
+  color: #111827;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
 }
 
-div.highlighter-rouge pre,
-figure.highlight > pre {
-  background-color: #f8f8f8;
-  padding: 1rem 1.2rem;
-  margin: 0;
-  line-height: 1.5;
-  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: 0.95rem;
-  white-space: pre;
-  overflow-x: auto;
-  tab-size: 4;
-  -webkit-overflow-scrolling: touch;
-  color: #333 !important; /* 强制覆盖 Rouge 默认颜色 */
+/* 链接下划线动画 */
+.post-content a:not(.btn) {
+  color: var(--primary-color);
+  text-decoration: none;
+  background-image: linear-gradient(transparent 90%, rgba(37, 99, 235, 0.2) 0);
+  background-size: 100% 100%;
+  transition: background-size 0.3s;
 }
 
-/* Rouge token 高亮统一颜色 */
-.highlight span {
-  color: inherit !important; /* 所有 span token 继承 pre 颜色 */
-  font-style: normal !important;
-  font-weight: normal !important;
-}
-
-/* 行内代码优化 */
-p code, li code, span.code-inline {
-  background-color: #f0f0f0;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95em;
-  color: #333 !important;
-}
-
-/* ----------------- 导航右对齐 ----------------- */
-header .nav-header {
-  display: flex !important;
-  justify-content: flex-end !important; /* 右对齐 */
-  align-items: center;
-  gap: 1.5rem; /* 菜单间距，可调整 */
-}
-
-/* 小屏幕下仍保留主题的汉堡菜单 */
-@media (max-width: 768px) {
-  header .nav-header {
-    justify-content: flex-start !important; /* 手机或小屏幕保持原样 */
-  }
+.post-content a:not(.btn):hover {
+  background-size: 100% 40%; /* 鼠标悬停时高亮背景变高 */
 }
