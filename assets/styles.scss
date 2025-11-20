@@ -12,5 +12,18 @@ styles: true
   z-index: 9999;
   transition: width 0.1s linear;
 }
+/* 文章卡片动画效果 */
+.post-list-item {
+  padding: 1.2rem;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+}
 ---
 @import "alembic";
