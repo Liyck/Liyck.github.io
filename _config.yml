@@ -1,6 +1,8 @@
-# Site configuration for Jekyll
+# =======================
+# Liyck 技术博客 - Jekyll 配置
+# =======================
 
-# 1. Exclude unnecessary files
+# 1. 排除不必要文件
 exclude:
   - README.md
   - CODE_OF_CONDUCT.md
@@ -19,7 +21,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
 
-# 2. Plugins
+# 2. 插件
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
@@ -27,31 +29,30 @@ plugins:
   - jekyll-redirect-from
   - jekyll-commonmark
   - jekyll-include-cache
-  # - jekyll-mentions
-  # - jemoji
 
-# 3. Plugin Settings
+# 3. 分页设置
 paginate: 10
 paginate_path: blog/page:num
 
+# 4. 站点基本信息
+title: "Liyck的技术博客"
+description: "分享编程技术、开发经验和生活感悟的个人博客"
+url: "https://liyckonline.top"
+baseurl: ""
+repo: "https://github.com/Liyck/Liyck.github.io"
 author: Liyck
-social:
-  name: Liyck
-  links:
-    - https://github.com/Liyck
-
-# 4. Jekyll settings
-sass:
-  style: compressed
-permalink: pretty
-excerpt_separator: <!-- excerpt -->
+email: ""
+date_format: "%Y年%-m月%-d日"
+lang: zh-CN
+locale: zh_CN
+encoding: utf-8
 timezone: Asia/Shanghai
-incremental: true  # 启用增量构建，提高性能
+css_inline: true
 
 # 5. Collections
 collections:
   posts:
-    title: 文章
+    title: "文章"
     output: true
     description: "技术探索与生活思考"
     feature_text: "欢迎来到我的博客"
@@ -77,23 +78,9 @@ defaults:
       path: "assets/images"
     values:
       image: true
-      image_lazy: false  # 延迟加载图片
+      image_lazy: false
 
-# 7. Site info
-encoding: utf-8
-lang: zh-CN
-locale: zh_CN
-title: "Liyck的技术博客"
-description: "分享编程技术、开发经验和生活感悟的个人博客"
-logo: "/assets/logos/logo.svg"
-url: "https://liyckonline.top"
-baseurl: ""
-repo: "https://github.com/Liyck/Liyck.github.io"
-email: ""  # 已清空
-date_format: "%Y年%-m月%-d日"
-css_inline: true
-
-# 8. Favicon
+# 7. Favicons
 favicons:
   16: '/assets/logos/logo@16px.png'
   32: '/assets/logos/logo@32px.png'
@@ -104,7 +91,7 @@ favicons:
   512: '/assets/logos/logo@512px.png'
   1024: '/assets/logos/logo@1024px.png'
 
-# 9. Navigation
+# 8. 导航
 navigation_header:
   - title: 首页
     url: /
@@ -123,18 +110,18 @@ navigation_footer:
   - title: "© 2023 Liyck 版权所有"
     url: https://liyckonline.top
 
-# 10. Social & sharing links (GitHub only)
+# 9. 社交链接
 social_links:
   GitHub: https://github.com/Liyck
 
-# 11. Font support
+# 10. 字体配置
 fonts:
   preconnect_urls:
     - https://fonts.gstatic.com
   font_urls:
     - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
 
-# 12. Comments (Gitalk example)
+# 11. 评论系统（Gitalk示例）
 comments:
   provider: gitalk
   gitalk:
@@ -144,7 +131,7 @@ comments:
     owner: Liyck
     admin: [Liyck]
 
-# 代码高亮配置
+# 12. 高亮代码设置
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
@@ -152,21 +139,30 @@ kramdown:
     block:
       line_numbers: true
 
-# 高级SEO设置
+# 13. SEO 设置
 seo:
   type: WebSite
   links:
     - https://github.com/Liyck
   name_format: "%s | Liyck的技术博客"
 
-# 静态资源缓存配置
+# 14. 静态资源缓存
 static_files_config:
   cache_control: "public, max-age=86400"
 
-# 环境特定配置
+# 15. Sass 配置
+sass:
+  style: compressed
+
+# 16. 环境特定配置
 development:
   show_drafts: true
   verbose: true
 production:
   show_drafts: false
   verbose: false
+
+# 17. Jekyll 全局设置
+permalink: pretty
+excerpt_separator: <!-- excerpt -->
+incremental: true
