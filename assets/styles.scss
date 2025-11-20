@@ -109,3 +109,17 @@ p code, li code, span.code-inline {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95em;
 }
+/* ----------------- 导航右对齐 ----------------- */
+header .nav-header {
+  display: flex !important;
+  justify-content: flex-end !important; /* 右对齐 */
+  align-items: center;
+  gap: 1.5rem; /* 菜单间距，可调整 */
+}
+
+/* 小屏幕下仍保留主题的汉堡菜单 */
+@media (max-width: 768px) {
+  header .nav-header {
+    justify-content: flex-start !important; /* 手机或小屏幕保持原样 */
+  }
+}
