@@ -6,189 +6,128 @@ styles: true
 @import "alembic";
 
 /* =========================================
-   1. 核心修复与全局设置
+   1. 强制修复代码块背景 (Mac 黑色终端风格)
    ========================================= */
 
-:root {
-  --primary-color: #2563eb;
-  --text-main: #334155;
-  --code-bg: #282c34; /* Mac 终端深色背景 */
+/* 针对 Alembic 主题的 .typeset 样式进行覆盖 */
+.typeset pre, 
+.typeset code, 
+.highlight,
+div.highlighter-rouge,
+div.highlighter-rouge pre {
+    font-family: 'JetBrains Mono', Consolas, monospace !important;
 }
 
-body {
-  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.8;
-  color: var(--text-main);
-  font-size: 16px;
-  background-color: #f9fafb; /* 极淡的灰背景 */
+/* 代码块容器 */
+div.highlighter-rouge, figure.highlight {
+    background-color: #282c34 !important; /* 深黑背景 */
+    border-radius: 10px;
+    margin: 2rem 0 !important;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 1px solid #21252b;
+}
+
+/* 顶部红黄绿三个点 (装饰) */
+div.highlighter-rouge::before, figure.highlight::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff5f56;
+    box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #27c93f;
+    z-index: 5;
+}
+
+/* 代码文字区域 */
+div.highlighter-rouge pre, figure.highlight pre {
+    background: transparent !important; /* 关键：去掉灰色底 */
+    color: #abb2bf !important;          /* 浅灰字 */
+    padding: 45px 20px 20px 20px !important; /* 顶部留空给三个点 */
+    border: none !important;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+/* 修复：强制去掉代码里每个字的背景色 */
+div.highlighter-rouge span, figure.highlight span, code span {
+    background-color: transparent !important; 
+}
+
+/* 行内代码 (如 `npm install`) */
+p code, li code {
+    background-color: rgba(255, 230, 230, 0.3) !important;
+    color: #c7254e !important;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(200,0,0,0.1);
 }
 
 /* =========================================
-   2. 代码块美化 (Mac 终端风格 + 修复高亮Bug)
+   2. 修复底部的 < > 导航 (Nav Share)
    ========================================= */
 
-/* 容器：圆角、阴影、深色背景 */
-div.highlighter-rouge, figure.highlight, .highlight {
-  background-color: var(--code-bg) !important;
-  color: #abb2bf;
-  margin: 1.5rem 0;
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  overflow: hidden; /* 防止内容溢出 */
+/* 这里的 .nav-share 是根据你的 post.html 推测的包含类 */
+/* 如果你的 include 文件叫 nav-share.html，通常外层会有个类似名字的 div */
+
+.nav-share, .post-nav, .navigation {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Noto Sans SC", sans-serif;
 }
 
-/* 顶部装饰：模拟 Mac 窗口红黄绿三个点 */
-div.highlighter-rouge::before, figure.highlight::before, .highlight::before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 12px;
-  height: 12px;
-  background: #ff5f56; /* 红 */
-  border-radius: 50%;
-  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f; /* 黄和绿 */
-  z-index: 2;
+/* 针对里面的链接进行美化 */
+.nav-share a, .post-nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    text-decoration: none !important;
+    color: #64748b;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    
+    /* 技巧：如果链接里包含纯文本 < 或 >，我们需要想办法处理 */
+    /* 这里我们只让它变成好看的按钮 */
 }
 
-/* 代码区域：留出顶部空间，强制字体 */
-div.highlighter-rouge pre, figure.highlight > pre, .highlight pre {
-  background-color: transparent !important; /* 核心修复：去除背景 */
-  padding: 50px 20px 20px 20px; /* 顶部留出50px给红黄绿点 */
-  margin: 0;
-  font-family: 'JetBrains Mono', Consolas, Monaco, monospace !important;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  overflow-x: auto;
-  border: none;
-}
-
-/* 核心修复：强制去除所有代码文字的背景色块 */
-.highlight span {
-  background-color: transparent !important;
-}
-
-/* Rouge 高亮配色微调 (Dracula 风格) */
-.highlight .c { color: #697286; font-style: italic; } /* 注释 */
-.highlight .k { color: #c678dd; } /* 关键字 purple */
-.highlight .s { color: #98c379; } /* 字符串 green */
-.highlight .nf { color: #61afef; } /* 函数 blue */
-.highlight .nb { color: #e5c07b; } /* 内建 yellow */
-.highlight .mi { color: #d19a66; } /* 数字 orange */
-
-/* 行内代码优化 (`code`) */
-p code, li code, span.code-inline {
-  background-color: rgba(27, 31, 35, 0.05);
-  color: #d73a49; /* 红色强调 */
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85em;
+.nav-share a:hover {
+    background: #2563eb;
+    color: #fff !important;
+    border-color: #2563eb;
+    transform: translateY(-2px);
 }
 
 /* =========================================
-   3. 修复底部的 < > 符号 (文章导航美化)
+   3. 字体与阅读体验优化
    ========================================= */
 
-/* 针对 Alembic 主题常见的导航类名 */
-.post-navigation, .entry-navigation {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #eaeaea;
+body, .typeset p {
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    color: #334155; /* 深蓝灰，比纯黑护眼 */
+    line-height: 1.8;
 }
 
-.post-navigation a, .entry-navigation a {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #555;
-  background: #fff;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+.article--post h1 {
+    font-weight: 700;
+    color: #0f172a;
 }
 
-.post-navigation a:hover, .entry-navigation a:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+/* 链接下划线效果 */
+.content a {
+    color: #2563eb;
+    text-decoration: none;
+    border-bottom: 1px dashed #2563eb;
 }
-
-/* 如果那个 < > 是纯文本，我们可以用 font-size: 0 隐藏它，再重写内容 */
-/* 注意：这取决于 HTML 结构，如果上面的 CSS 没生效，可能需要更暴力的隐藏 */
-
-/* =========================================
-   4. 阅读进度条 & 卡片动画 (保留你原有的)
-   ========================================= */
-
-#reading-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0%;
-  background: linear-gradient(to right, #3498db, #2ecc71); /* 渐变色更好看 */
-  z-index: 9999;
-  transition: width 0.1s linear;
-}
-
-.post-list-item {
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-}
-
-.post-list-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  border-color: rgba(37, 99, 235, 0.2);
-}
-
-/* =========================================
-   5. 按钮与排版微调
-   ========================================= */
-
-button, .btn, .button {
-  padding: 0.6rem 1.4rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-weight: 600;
-}
-
-button:hover, .btn:hover, .button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* 标题优化 */
-h1, h2, h3 {
-  color: #111827;
-  font-weight: 700;
-  margin-top: 2em;
-  margin-bottom: 0.8em;
-}
-
-/* 链接下划线动画 */
-.post-content a:not(.btn) {
-  color: var(--primary-color);
-  text-decoration: none;
-  background-image: linear-gradient(transparent 90%, rgba(37, 99, 235, 0.2) 0);
-  background-size: 100% 100%;
-  transition: background-size 0.3s;
-}
-
-.post-content a:not(.btn):hover {
-  background-size: 100% 40%; /* 鼠标悬停时高亮背景变高 */
+.content a:hover {
+    border-bottom-style: solid;
 }
