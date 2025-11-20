@@ -231,36 +231,40 @@ p code, li code, span.code-inline {
 .nav-card.empty { border: none; background: transparent; box-shadow: none; pointer-events: none; }
 
 /* ==========================================================================
-   4. 布局宽度调整 (Layout Width Adjustment)
+   4. 布局宽度调整 (Layout Width Adjustment) - 终极版
    ========================================================================== */
 
-/* 4.1 核心容器拓宽 */
+/* 4.1 核心容器拓宽 (已应用) */
 .container, .main {
-    /* 这里设置你想要的宽度，通常 1100px 适合技术博客 */
     max-width: var(--site-width) !important; 
-    width: 94% !important; /* 小屏幕左右留一点边距 */
+    width: 94% !important;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* 4.2 确保导航栏内容也对齐这个宽度 */
+/* 4.2 确保导航栏内容也对齐这个宽度 (已应用) */
 .site-header .container, header .container {
     max-width: var(--site-width) !important;
 }
 
-/* 4.3 强制让文章内容撑满容器 */
+/* 4.3 强制让文章内容区域填满容器，并移除所有内部边距限制 */
 .article, .content, .typeset {
     max-width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    /* 移除可能存在的内部 padding 或 margin，确保从容器最左边开始 */
+    padding: 0 !important;
+    margin: 0 auto !important;
 }
 
-/* 4.4 稍微限制一下正文段落的宽度，防止单行文字太长读着累 */
-/* 但代码块保持全宽 */
-.typeset p, .typeset ul, .typeset ol {
-    max-width: 100%; /* 如果觉得文字太长，可以改成 800px */
-    margin-left: 0;
-    margin-right: auto;
+/* 4.4 核心修复：强制文字段落撑满父容器 (解决内容太窄的问题) */
+/* 使用高权重选择器，确保覆盖主题的内部宽度限制 */
+.article--post .typeset p, 
+.article--post .typeset ul, 
+.article--post .typeset ol,
+.article--post .typeset blockquote {
+    max-width: 100% !important; /* 强制填满 1100px 的空间 */
+    width: 100% !important;
+    margin-left: 0 !important;  /* 移除内部左侧边距 */
+    margin-right: 0 !important; /* 移除内部右侧边距 */
 }
 
 /* ==========================================================================
