@@ -231,42 +231,77 @@ p code, li code, span.code-inline {
 .nav-card.empty { border: none; background: transparent; box-shadow: none; pointer-events: none; }
 
 /* ==========================================================================
-   4. 布局宽度调整 (Layout Width Adjustment) - 终极版
+   4. 布局宽度调整 (Layout Width Adjustment) - 终极版 V2
    ========================================================================== */
 
-/* 4.1 核心容器拓宽 (已应用) */
+/* 4.1 核心容器拓宽 (已生效，保持不变) */
 .container, .main {
     max-width: var(--site-width) !important; 
-    width: 94% !important;
-    margin-left: auto;
-    margin-right: auto;
+    width: 94% !important; /* 94% 确保在手机端也有留白 */
+    margin-left: auto !important; /* 居中 */
+    margin-right: auto !important; /* 居中 */
+    padding-left: 20px !important; /* 强制左右内边距，防止贴边 */
+    padding-right: 20px !important;
 }
 
-/* 4.2 确保导航栏内容也对齐这个宽度 (已应用) */
+/* 4.2 确保导航栏内容也对齐这个宽度 (已生效，保持不变) */
 .site-header .container, header .container {
     max-width: var(--site-width) !important;
 }
 
-/* 4.3 强制让文章内容区域填满容器，并移除所有内部边距限制 */
-.article, .content, .typeset {
-    max-width: 100% !important;
-    /* 移除可能存在的内部 padding 或 margin，确保从容器最左边开始 */
-    padding: 0 !important;
-    margin: 0 auto !important;
+/* 4.3 核心修复：强制让文章内容区域 (article, content, typeset) 
+      完全填满父容器的宽度，并移除所有内部宽度/边距限制。 */
+/* 这将解除所有文本和代码块的“窄区域”限制 */
+.article, .content, .typeset,
+.article.article--post,
+.article.article--post.content,
+.article.article--post.content.typeset {
+    max-width: 100% !important; /* 强制填满父容器 (即 .container 的 1100px) */
+    width: 100% !important;     /* 确保宽度为 100% */
+    padding-left: 0 !important; /* 移除内部的左侧内边距 */
+    padding-right: 0 !important;/* 移除内部的右侧内边距 */
+    margin-left: 0 !important;  /* 移除内部的左侧外边距 */
+    margin-right: 0 !important; /* 移除内部的右侧外边距 */
 }
 
-/* 4.4 核心修复：强制文字段落撑满父容器 (解决内容太窄的问题) */
-/* 使用高权重选择器，确保覆盖主题的内部宽度限制 */
+/* 4.4 进一步强制正文段落、列表、引用块等也撑满 */
+/* 使用最高权重，确保覆盖主题对文字内容的默认宽度限制 */
 .article--post .typeset p, 
 .article--post .typeset ul, 
 .article--post .typeset ol,
-.article--post .typeset blockquote {
-    max-width: 100% !important; /* 强制填满 1100px 的空间 */
+.article--post .typeset blockquote,
+.article--post .typeset table,
+.article--post .typeset img {
+    max-width: 100% !important; 
     width: 100% !important;
-    margin-left: 0 !important;  /* 移除内部左侧边距 */
-    margin-right: 0 !important; /* 移除内部右侧边距 */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important; /* 确保 padding 不会超出 100% 宽度 */
 }
 
+/* 如果你的文章有图片或表格，它们也应该全宽显示 */
+.article--post .typeset figure,
+.article--post .typeset .image-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* 4.5 确保代码块也能完全撑开 (虽然之前已经修复，这里是再次确认) */
+div.highlighter-rouge, figure.highlight, .highlight {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* 4.6 响应式优化 (防止在极小屏幕上过于拥挤) */
+@media (max-width: 768px) {
+    .container, .main {
+        width: 96% !important; /* 手机端两边留更小的边距 */
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
 /* ==========================================================================
    5. 其他组件 (阅读进度条 & 按钮)
    ========================================================================== */
