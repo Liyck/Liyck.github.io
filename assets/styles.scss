@@ -1,6 +1,10 @@
 ---
 title: false
 styles: true
+---
+
+@import "alembic";
+
 /* 阅读进度条 */
 #reading-progress {
   position: fixed;
@@ -8,10 +12,11 @@ styles: true
   left: 0;
   height: 4px;
   width: 0%;
-  background: #3498db;   // 自适配现有主题色（自己改成你主题的主色）
+  background: #3498db;   // 改成你的主题色
   z-index: 9999;
   transition: width 0.1s linear;
 }
+
 /* 文章卡片动画效果 */
 .post-list-item {
   padding: 1.2rem;
@@ -25,6 +30,7 @@ styles: true
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   }
 }
+
 /* 按钮动画 */
 button, .btn, .button {
   padding: 0.55rem 1.2rem;
@@ -43,6 +49,7 @@ button, .btn, .button {
     box-shadow: none;
   }
 }
+
 /* 全局字体优化 */
 body {
   font-family: 'Noto Sans SC', sans-serif;
@@ -61,6 +68,3 @@ h1, h2, h3 {
   letter-spacing: 0.5px;
   font-weight: 600;
 }
-
----
-@import "alembic";
