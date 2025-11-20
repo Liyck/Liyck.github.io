@@ -1,13 +1,13 @@
-<!-- Overwrite this file with code you want before the closing body tag -->
-
-<!-- 阅读进度条脚本（必须放在最下面） -->
+<!-- 阅读进度条脚本（放这里是正确的） -->
 <script>
 document.addEventListener("scroll", function () {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollTop = document.documentElement.scrollTop;
   const progress = (scrollTop / docHeight) * 100;
+
   const bar = document.getElementById("reading-progress");
-  if (bar) bar.style.width = progress + "%";
+  if (bar) {
+    bar.style.width = progress + "%";
+  }
 });
 </script>
-
