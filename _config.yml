@@ -47,7 +47,7 @@ lang: zh-CN
 locale: zh_CN
 encoding: utf-8
 timezone: Asia/Shanghai
-css_inline: true
+css_inline: false
 
 # 5. Collections
 collections:
