@@ -2,45 +2,22 @@
 layout: default
 ---
 
-{% include site-header.html %}
-
 <main class="main container">
+  <div class="content">
 
-  <style>
-    .category-wrapper {
-      max-width: 850px;
-      margin: auto;
-      padding-top: 30px;
-    }
-    .post-item {
-      margin-bottom: 20px;
-      padding: 12px 15px;
-      border-left: 4px solid #999;
-      background: #f7f7f7;
-      border-radius: 6px;
-    }
-    .post-item a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1.1rem;
-    }
-    .post-item:hover {
-      background: #ececec;
-    }
-  </style>
+    <article class="article article--page typeset">
+      <h1>分类：{{ page.category }}</h1>
 
-  <div class="category-wrapper">
-    <h1>分类：{{ page.title }}</h1>
+      <ul>
+        {% for post in site.categories[page.category] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
 
-    <p style="color:#666">共 {{ site.categories[page.title] | size }} 篇文章</p>
+    </article>
 
-    {% for post in site.categories[page.title] %}
-    <div class="post-item">
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    </div>
-    {% endfor %}
   </div>
-
 </main>
-
-{% include site-footer.html %}
