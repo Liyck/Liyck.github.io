@@ -105,37 +105,82 @@ body {
     padding: 0;
     list-style: none;
 }
+/* =========================================
+   分类页终极美化（适配 Alembic）
+   ========================================= */
 
-/* 6.4 分类页 (Categories) 的布局修复 */
-/* 修复两栏布局不对齐或混乱的问题 */
 .layout--categories .main .container {
-    /* 如果页面使用了两栏结构，强制其对齐 */
-    display: flex; 
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    max-width: 980px !important;   /* 分类页不需要 1100px 太宽 */
+    margin: 0 auto !important;
 }
 
-/* 分类页的左侧索引 (Index) */
+/* 移除左右两栏布局，只保留单栏 */
 .layout--categories .content {
-    flex: 1 1 65%; /* 列表内容占据 65% 宽度 */
-    padding-right: 30px;
-    box-sizing: border-box;
+    width: 100% !important;
+    padding: 0 !important;
 }
 
-/* 分类页的右侧侧边栏 (通常是分类列表) */
+/* 隐藏右侧 aside（几乎没内容，反而影响布局） */
 .layout--categories .aside {
-    flex: 0 0 30%; /* 侧边栏占据 30% 宽度 */
-    padding-top: 2rem;
+    display: none !important;
 }
 
-/* 6.5 修复分类页右侧的分类列表标题 */
-.layout--categories .aside h1,
-.layout--categories .aside h2,
-.layout--categories .aside h3 {
-    text-align: right; /* 标题靠右对齐，与右侧的 aside 布局呼应 */
-    margin-top: 0;
+/* 分类标题居中 */
+.layout--categories h1,
+.layout--categories h2 {
+    text-align: center !important;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 800;
+    color: #1e293b;
 }
+
+/* 分类下文章列表 → 网格卡片布局 */
+.layout--categories .post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 1.8rem;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+/* 单个文章卡片 */
+.layout--categories .post-list-item {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.layout--categories .post-list-item:hover {
+    transform: translateY(-6px);
+    border-color: rgba(37, 99, 235, 0.25);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+/* 卡片标题 */
+.layout--categories .post-list-item h2,
+.layout--categories .post-list-item h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: .6rem;
+    color: #1e293b;
+}
+
+.layout--categories .post-list-item p {
+    color: #64748b;
+}
+
+/* 手机端优化 */
+@media (max-width: 600px) {
+    .layout--categories .post-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* ==========================================================================
    2. 代码块终极美化 (Mac Terminal Style + 滚动条修复)
