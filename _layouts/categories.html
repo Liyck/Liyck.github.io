@@ -4,23 +4,63 @@ layout: default
 
 {% include site-header.html %}
 
-<main class="main  container">
+<main class="main container">
 
-  <div class="content">
+  <style>
+    /* 分类标题整体居中 */
+    .categories-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+    }
 
-    <article class="article  article--page  typeset">
+    /* 网格容器 */
+    .categories-grid {
+      margin: 40px auto;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
 
-      <h1>{{ page.title }}</h1>
+    /* 分类卡片 */
+    .category-card {
+      padding: 18px 12px;
+      border-radius: 8px;
+      background: #f7f7f7;
+      border: 1px solid #e1e1e1;
+      transition: 0.2s;
+      font-size: 1.05rem;
+    }
 
-      {{ content }}
+    .category-card:hover {
+      background: #ececec;
+      border-color: #d0d0d0;
+      transform: translateY(-2px);
+    }
 
-    </article>
+    .category-card a {
+      text-decoration: none;
+      color: #333;
+    }
 
-    {% include post-categories.html %}
+  </style>
 
+  <div class="categories-wrapper">
+    <h1>{{ page.title }}</h1>
+    <p style="color:#666;font-size:15px;">共 {{ site.categories | size }} 个分类</p>
+
+    <div class="categories-grid">
+      {% for category in site.categories %}
+      <div class="category-card">
+        <a href="{{ '/categories/' | append: category[0] | relative_url }}">
+          {{ category[0] }}（{{ category[1].size }}）
+        </a>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-
-  {% if page.aside == true %}{% include site-aside.html align="left" %}{% endif %}
 
 </main>
 
