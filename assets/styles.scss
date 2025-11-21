@@ -76,6 +76,68 @@ body {
 }
 
 /* ==========================================================================
+   6. 首页/列表页/分类页布局优化 (Home/Blog/Categories Layout Fixes)
+   ========================================================================== */
+
+/* 6.1 博客列表页/首页的头部居中 (居中欢迎语、标题等) */
+/* 针对 home, blog, page layout 的主要头部区域 */
+.page--home .typeset,
+.page--blog .typeset {
+    text-align: center; /* 标题和介绍文字居中 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 6.2 确保主标题和描述信息能够居中显示 */
+.page--home .article h1,
+.page--blog .article h1,
+.page--home .article p,
+.page--blog .article p {
+    text-align: center;
+    max-width: 800px; /* 限制居中块的宽度，避免文字太长 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 6.3 博客列表的优化 (列表本身不需要居中，但需要清晰的间距和样式) */
+.post-list {
+    margin-top: 3rem;
+    padding: 0;
+    list-style: none;
+}
+
+/* 6.4 分类页 (Categories) 的布局修复 */
+/* 修复两栏布局不对齐或混乱的问题 */
+.layout--categories .main .container {
+    /* 如果页面使用了两栏结构，强制其对齐 */
+    display: flex; 
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* 分类页的左侧索引 (Index) */
+.layout--categories .content {
+    flex: 1 1 65%; /* 列表内容占据 65% 宽度 */
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+/* 分类页的右侧侧边栏 (通常是分类列表) */
+.layout--categories .aside {
+    flex: 0 0 30%; /* 侧边栏占据 30% 宽度 */
+    padding-top: 2rem;
+}
+
+/* 6.5 修复分类页右侧的分类列表标题 */
+.layout--categories .aside h1,
+.layout--categories .aside h2,
+.layout--categories .aside h3 {
+    text-align: right; /* 标题靠右对齐，与右侧的 aside 布局呼应 */
+    margin-top: 0;
+}
+
+/* ==========================================================================
    2. 代码块终极美化 (Mac Terminal Style + 滚动条修复)
    ========================================================================== */
 
