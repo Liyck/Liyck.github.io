@@ -1,8 +1,8 @@
-const version = '20250616182109';
+const version = '20251121142030';
 const cacheName = `static::${version}`;
 
 const buildContentBlob = () => {
-  return ["/general/2016/08/29/example-post-three/","/history/external%20sources/2016/08/28/example-post-two/","/general/external%20sources/2016/08/27/example-post-one/","/categories/","/elements/","/blog/","/","/manifest.json","/offline/","/assets/search.json","/search/","/assets/styles.css","/thanks/","/redirects.json","/sitemap.xml","/robots.txt","/feed.xml","/assets/styles.css.map","/assets/logos/logo.svg", "/assets/default-offline-image.png", "/assets/scripts/fetch.js"
+  return ["/%E6%8A%80%E6%9C%AF/2025/08/01/my-second-post/","/%E6%8A%80%E6%9C%AF/2025/06/16/my-first-post/","/about/","/categories/","/elements/","/categories/","/blog/","/","/manifest.json","/offline/","/projects/","/search/","/assets/search.json","/search.json","/search/","/assets/styles.css","/thanks/","/categories/e68a80e69caf/","/redirects.json","/tags/jekyll/","/tags/markdown/","/categories/%E6%8A%80%E6%9C%AF/","/sitemap.xml","/robots.txt","/assets/styles.css.map","", "/assets/default-offline-image.png", "/assets/scripts/fetch.js"
   ]
 }
 

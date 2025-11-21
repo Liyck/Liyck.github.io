@@ -21,7 +21,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
 
-# 2. 插件
+# 2. 插件（已移除 generate_categories，改用 jekyll-archives）
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
@@ -29,13 +29,25 @@ plugins:
   - jekyll-redirect-from
   - jekyll-commonmark
   - jekyll-include-cache
-  - generate_categories
+  - jekyll-archives   # 新增：官方维护的分类/标签归档插件
 
-# 3. 分页设置
+# 3. jekyll-archives 配置（自动生成 /categories/xxx/ 页面）
+jekyll-archives:
+  enabled:
+    - categories   # 开启分类归档
+    - tags         # 如果你也需要标签页，可以保留
+  layouts:
+    category: category_index   # 对应 _layouts/category_index.html
+    tag: tag_index             # 如果需要标签页也顺便配好
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+
+# 4. 分页设置
 paginate: 10
-paginate_path: blog/page:num
+paginate_path: /blog/page:num/
 
-# 4. 站点基本信息
+# 5. 站点基本信息
 title: "Liyck的技术博客"
 description: "分享编程技术、开发经验和生活感悟的个人博客"
 url: "https://liyckonline.top"
@@ -50,7 +62,7 @@ encoding: utf-8
 timezone: Asia/Shanghai
 css_inline: false
 
-# 5. Collections
+# 6. Collections（你这里其实没用到 collections，保留原样即可）
 collections:
   posts:
     title: "文章"
@@ -59,7 +71,7 @@ collections:
     feature_text: "欢迎来到我的博客"
     feature_image: "/assets/images/banner.jpg"
 
-# 6. Defaults
+# 7. Defaults
 defaults:
   - scope:
       path: ""
@@ -81,7 +93,7 @@ defaults:
       image: true
       image_lazy: false
 
-# 7. Favicons
+# 8. Favicons
 favicons:
   16: '/assets/logos/logo@16px.png'
   32: '/assets/logos/logo@32px.png'
@@ -92,7 +104,7 @@ favicons:
   512: '/assets/logos/logo@512px.png'
   1024: '/assets/logos/logo@1024px.png'
 
-# 8. 导航
+# 9. 导航
 navigation_header:
   - title: 首页
     url: /
@@ -108,21 +120,21 @@ navigation_header:
     url: /search/
 
 navigation_footer:
-  - title: "© 2023 Liyck 版权所有"
+  - title: "© 2023-2025 Liyck 版权所有"
     url: https://liyckonline.top
 
-# 9. 社交链接
+# 10. 社交链接
 social_links:
   GitHub: https://github.com/Liyck
 
-# 10. 字体配置
+# 11. 字体配置
 fonts:
   preconnect_urls:
     - https://fonts.gstatic.com
   font_urls:
     - https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap
 
-# 11. 评论系统（Gitalk示例）
+# 12. 评论系统（Gitalk 示例，记得替换成你自己的）
 comments:
   provider: gitalk
   gitalk:
@@ -132,7 +144,7 @@ comments:
     owner: Liyck
     admin: [Liyck]
 
-# 12. 高亮代码设置
+# 13. 高亮代码设置
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
@@ -140,22 +152,22 @@ kramdown:
     block:
       line_numbers: true
 
-# 13. SEO 设置
+# 14. SEO 设置
 seo:
   type: WebSite
   links:
     - https://github.com/Liyck
   name_format: "%s | Liyck的技术博客"
 
-# 14. 静态资源缓存
+# 15. 静态资源缓存
 static_files_config:
   cache_control: "public, max-age=86400"
 
-# 15. Sass 配置
+# 16. Sass 配置
 sass:
   style: compressed
 
-# 16. 环境特定配置
+# 17. 环境特定配置
 development:
   show_drafts: true
   verbose: true
@@ -163,7 +175,7 @@ production:
   show_drafts: false
   verbose: false
 
-# 17. Jekyll 全局设置
+# 18. Jekyll 全局设置
 permalink: pretty
 excerpt_separator: <!-- excerpt -->
 incremental: true

@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="page-header">
+  <h1 class="page-title">标签：{{ page.tag }}</h1>
+</div>
+
+<div class="post-list">
+  {% for post in page.posts %}
+    <article class="post-item">
+      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <h2 class="post-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      {% if post.excerpt %}
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+      {% endif %}
+    </article>
+  {% else %}
+    <p>暂无文章</p>
+  {% endfor %}
+</div>

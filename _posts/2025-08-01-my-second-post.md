@@ -2,7 +2,7 @@
 layout: post
 title: "seccomp沙盒绕过"
 date: 2025-08-01 10:00:00 +0800
-categories: [技术]
+categories: ["技术"]
 tags: [Jekyll, Markdown]
 excerpt: "开始吧，我的blog"
 feature_text: |

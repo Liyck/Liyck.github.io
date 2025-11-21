@@ -1,0 +1,114 @@
+---
+layout: default
+---
+
+<div class="page-header">
+  <h1 class="page-title">分类：{{ page.category }}</h1>
+  <p class="page-subtitle">{{ page.posts.size }} 篇文章</p>
+</div>
+
+<div class="articles-grid">
+  {% for post in page.posts %}
+    <a href="{{ post.url | relative_url }}" class="article-card">
+      <div class="article-date">{{ post.date | date: "%Y年%m月%d日" }}</div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</p>
+      <span class="read-more">阅读全文 →</span>
+    </a>
+  {% endfor %}
+</div>
+
+<style>
+  .page-subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: -1rem 0 3.5rem;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.2rem;
+    padding: 0 1rem;
+  }
+
+  .article-card {
+    background: #ffffff;
+    border-radius: 26px;
+    padding: 2.8rem 2.2rem;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    border: 1.5px solid rgba(52,211,153,0.12);
+    transition: all 0.45s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .article-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(110,231,183,0.1));
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .article-card:hover::before {
+    opacity: 1;
+  }
+
+  .article-card:hover {
+    transform: translateY(-16px);
+    box-shadow: 0 32px 70px rgba(52,211,153,0.28);
+    border-color: rgba(52,211,153,0.5);
+  }
+
+  .article-date {
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin-bottom: 1rem;
+  }
+
+  .article-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 1.2rem;
+    line-height: 1.35;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .article-excerpt {
+    color: #475569;
+    line-height: 1.75;
+    margin-bottom: 1.8rem;
+  }
+
+  .read-more {
+    color: #10b981;
+    font-weight: 700;
+    font-size: 1.05rem;
+    align-self: flex-start;
+  }
+
+  /* 彻底消灭所有可能出现的红色（包括链接hover、标签、代码错误高亮等） */
+  a:hover, a:focus, .tag a, .post-meta a:hover {
+    color: #10b981 !important;
+  }
+
+  /* 如果文章底部有标签，也强制清新绿 */
+  .post-tags a, .tags a, .tag {
+    background: rgba(52,211,153,0.15) !important;
+    color: #10b981 !important;
+    border-color: rgba(52,211,153,0.3) !important;
+  }
+
+  @media (max-width: 640px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

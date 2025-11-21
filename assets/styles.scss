@@ -2,20 +2,63 @@
 title: false
 styles: true
 ---
-
 @import "alembic";
 
 /* ==========================================================================
-   1. 全局基础样式 (Global Styles)
+   清新薄荷绿版 · 2025 最治愈渐变下划线（速度极快、无紫色）
    ========================================================================== */
 :root {
-  --primary-color: #2563eb;       /* 现代蓝 */
-  --text-main: #334155;           /* 深蓝灰 */
-  --code-bg: #282c34;             /* 代码块背景 */
-  --scrollbar-thumb: #4b5263;     /* 滚动条滑块色 */
-  --site-width: 1100px;           /* 自定义页面宽度 */
+  --primary-color: #10b981;
+  /* 祖母绿 */
+  --gradient-start: #34d399;   /* 薄荷绿 */
+  --gradient-end: #6ee7b7;     /* 青柠绿 */
+  --text-main: #1e293b;
+  --code-bg: #282c34;
+  --site-width: 1100px;
 }
 
+/* 核心：超快清爽渐变下划线 */
+h1, h2, h3, h4, h5, h6,
+.post-title a,
+.article--apsible h1 a,
+.content a:not(.btn):not(.nav-card):not(.post-meta a) {
+  position: relative;
+  color: #0f172a !important;
+  text-decoration: none !important;
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.32s cubic-bezier( yük 0.22, 0.61, 0.36, 1);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover,
+.post-title a:hover,
+.article--post h1 a:hover,
+.content a:not(.btn):not(.nav-card):not(.post-meta a):hover {
+  background-size: 100% 2px;
+}
+
+/* 文章内链接更轻量 */
+.content a:not(.btn):not(.post-meta a) {
+  color: var(--primary-color);
+  background-size: 0% 1.5px;
+}
+.content a:not(.btn):not(.post-meta a):hover {
+  background-size: 100% 1.5px;
+}
+
+/* 彻底清除旧下划线 */
+h1, h2, h3, h4, h5, h6,
+.post-title a,
+.article--post h1 a,
+.post-meta a {
+  border-bottom: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* 保留你所有原有美化（代码块、卡片、进度条等） */
 body {
   font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.8;
@@ -23,187 +66,16 @@ body {
   background-color: #f9fafb;
 }
 
-/* 文章内链接美化 */
-.content a:not(.btn) {
-  color: var(--primary-color);
-  text-decoration: none;
-  border-bottom: 1px dashed var(--primary-color);
-  transition: all 0.3s ease;
-}
-
-.content a:not(.btn):hover {
-  border-bottom-style: solid;
-  opacity: 0.8;
-}
-
-/* 标题优化 */
-.article--post h1, h2, h3 {
-  font-weight: 700;
-  color: #0f172a;
-  margin-top: 1.5em;
-}
-
-/* =========================================
-   修复：移除标题及元信息链接上的双重下划线
-   ========================================= */
-
-/* 1. 强制移除主标题链接上的所有下划线/边框 */
-.article--post h1 a, 
-.article--post h1 .typeset a {
-    text-decoration: none !important; /* 移除 text-decoration (例如蓝线) */
-    border: none !important;          /* 移除 border-bottom (例如绿线) */
-    box-shadow: none !important;      /* 移除可能存在的 box-shadow 装饰 */
-    color: #0f172a !important;        /* 确保标题文字颜色为深黑色，而不是链接蓝 */
-}
-
-/* 2. 移除文章元信息 (Category/Date) 链接上的下划线/边框 */
-/* 假设元信息包含在 .post-meta 或 .article--post > p 标签中 */
-.post-meta a, 
-.article--post > p a {
-    text-decoration: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: #64748b !important; /* 保持低调的灰色作为链接颜色 */
-    padding-bottom: 0 !important;
-}
-
-/* 3. 确保悬停时也不出现下划线 */
-.article--post h1 a:hover,
-.post-meta a:hover {
-    border: none !important;
-    text-decoration: none !important;
-    opacity: 0.9;
-}
-
-/* ==========================================================================
-   6. 首页/列表页/分类页布局优化 (Home/Blog/Categories Layout Fixes)
-   ========================================================================== */
-
-/* 6.1 博客列表页/首页的头部居中 (居中欢迎语、标题等) */
-/* 针对 home, blog, page layout 的主要头部区域 */
-.page--home .typeset,
-.page--blog .typeset {
-    text-align: center; /* 标题和介绍文字居中 */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* 6.2 确保主标题和描述信息能够居中显示 */
-.page--home .article h1,
-.page--blog .article h1,
-.page--home .article p,
-.page--blog .article p {
-    text-align: center;
-    max-width: 800px; /* 限制居中块的宽度，避免文字太长 */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* 6.3 博客列表的优化 (列表本身不需要居中，但需要清晰的间距和样式) */
-.post-list {
-    margin-top: 3rem;
-    padding: 0;
-    list-style: none;
-}
-/* =========================================
-   分类页终极美化（适配 Alembic）
-   ========================================= */
-
-.layout--categories .main .container {
-    max-width: 980px !important;   /* 分类页不需要 1100px 太宽 */
-    margin: 0 auto !important;
-}
-
-/* 移除左右两栏布局，只保留单栏 */
-.layout--categories .content {
-    width: 100% !important;
-    padding: 0 !important;
-}
-
-/* 隐藏右侧 aside（几乎没内容，反而影响布局） */
-.layout--categories .aside {
-    display: none !important;
-}
-
-/* 分类标题居中 */
-.layout--categories h1,
-.layout--categories h2 {
-    text-align: center !important;
-    font-size: 2rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    font-weight: 800;
-    color: #1e293b;
-}
-
-/* 分类下文章列表 → 网格卡片布局 */
-.layout--categories .post-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-gap: 1.8rem;
-    padding: 0;
-    margin-top: 2rem;
-}
-
-/* 单个文章卡片 */
-.layout--categories .post-list-item {
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.layout--categories .post-list-item:hover {
-    transform: translateY(-6px);
-    border-color: rgba(37, 99, 235, 0.25);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-}
-
-/* 卡片标题 */
-.layout--categories .post-list-item h2,
-.layout--categories .post-list-item h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: .6rem;
-    color: #1e293b;
-}
-
-.layout--categories .post-list-item p {
-    color: #64748b;
-}
-
-/* 手机端优化 */
-@media (max-width: 600px) {
-    .layout--categories .post-list {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-/* ==========================================================================
-   2. 代码块终极美化 (Mac Terminal Style + 滚动条修复)
-   ========================================================================== */
-
-/* 2.1 字体强制重置 */
-.typeset pre, .typeset code, .highlight,
-div.highlighter-rouge, div.highlighter-rouge pre, figure.highlight pre {
-    font-family: 'JetBrains Mono', Consolas, Monaco, monospace !important;
-}
-
-/* 2.2 外层容器：禁止滚动，只负责背景和圆角 */
+/* Mac 终端代码块 */
 div.highlighter-rouge, figure.highlight, .highlight {
     background-color: var(--code-bg) !important;
     border-radius: 12px;
     margin: 2rem 0 !important;
     position: relative;
-    overflow: hidden !important; /* 禁止外层滚动 */
+    overflow: hidden !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border: 1px solid #21252b;
 }
-
-/* 2.3 顶部装饰 (红黄绿三个点) */
 div.highlighter-rouge::before, figure.highlight::before, .highlight::before {
     content: "";
     display: block;
@@ -217,283 +89,171 @@ div.highlighter-rouge::before, figure.highlight::before, .highlight::before {
     box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #27c93f;
     z-index: 10;
 }
-
-/* 2.4 内部区域：允许横向滚动 */
 div.highlighter-rouge pre, figure.highlight pre, .highlight pre {
     background: transparent !important;
     margin: 0 !important;
     padding: 50px 20px 20px 20px !important;
-    overflow-x: auto !important; /* 允许横向滚动 */
-    overflow-y: hidden !important;
-    border: none !important;
+    overflow-x: auto !important;
     color: #abb2bf !important;
     font-size: 0.9rem;
     line-height: 1.6;
-    width: 100%;
 }
 
-/* 2.5 修复背景色块 */
-div.highlighter-rouge span, figure.highlight span, code span {
-    background-color: transparent !important; 
-}
-
-/* 2.6 表格修复 */
-div.highlighter-rouge table, figure.highlight table {
-    border: none !important;
-    margin: 0 !important;
-    background: transparent !important;
-}
-div.highlighter-rouge td, figure.highlight td {
-    border: none !important;
-    padding: 0 !important;
-}
-
-/* 2.7 滚动条美化 */
-div.highlighter-rouge pre::-webkit-scrollbar,
-figure.highlight pre::-webkit-scrollbar {
-    height: 8px;
-    background-color: var(--code-bg);
-}
-div.highlighter-rouge pre::-webkit-scrollbar-thumb,
-figure.highlight pre::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
-    border-radius: 4px;
-    border: 2px solid var(--code-bg);
-}
-div.highlighter-rouge pre::-webkit-scrollbar-button {
-    display: none;
-}
-
-/* 2.8 行内代码 */
-p code, li code, span.code-inline {
-    background-color: rgba(255, 95, 86, 0.1) !important;
-    color: #c7254e !important;
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.85em;
-}
-
-/* ==========================================================================
-   3. 底部导航卡片美化
-   ========================================================================== */
-.post-navigation-wrapper {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eaeaea;
-    flex-wrap: wrap;
-}
-
-.nav-card {
-    flex: 1;
-    min-width: 240px;
-    padding: 20px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    text-decoration: none !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-card:not(.empty):hover {
-    border-color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
-}
-
-.nav-label {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-}
-
-.nav-label svg { width: 16px; height: 16px; }
-.nav-card.next .nav-label { justify-content: flex-end; }
-.nav-card.next .nav-title { text-align: right; }
-
-.nav-title {
-    font-weight: 700;
-    color: #1e293b;
-    font-size: 1rem;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.nav-card:hover .nav-title { color: var(--primary-color); }
-.nav-card.empty { border: none; background: transparent; box-shadow: none; pointer-events: none; }
-
-/* ==========================================================================
-   4. 布局宽度调整 (Layout Width Adjustment) - 终极版 V2
-   ========================================================================== */
-
-/* 4.1 核心容器拓宽 (已生效，保持不变) */
-.container, .main {
-    max-width: var(--site-width) !important; 
-    width: 94% !important; /* 94% 确保在手机端也有留白 */
-    margin-left: auto !important; /* 居中 */
-    margin-right: auto !important; /* 居中 */
-    padding-left: 20px !important; /* 强制左右内边距，防止贴边 */
-    padding-right: 20px !important;
-}
-
-/* 4.2 确保导航栏内容也对齐这个宽度 (已生效，保持不变) */
-.site-header .container, header .container {
-    max-width: var(--site-width) !important;
-}
-
-/* 4.3 核心修复：强制让文章内容区域 (article, content, typeset) 
-      完全填满父容器的宽度，并移除所有内部宽度/边距限制。 */
-/* 这将解除所有文本和代码块的“窄区域”限制 */
-.article, .content, .typeset,
-.article.article--post,
-.article.article--post.content,
-.article.article--post.content.typeset {
-    max-width: 100% !important; /* 强制填满父容器 (即 .container 的 1100px) */
-    width: 100% !important;     /* 确保宽度为 100% */
-    padding-left: 0 !important; /* 移除内部的左侧内边距 */
-    padding-right: 0 !important;/* 移除内部的右侧内边距 */
-    margin-left: 0 !important;  /* 移除内部的左侧外边距 */
-    margin-right: 0 !important; /* 移除内部的右侧外边距 */
-}
-
-/* 4.4 进一步强制正文段落、列表、引用块等也撑满 */
-/* 使用最高权重，确保覆盖主题对文字内容的默认宽度限制 */
-.article--post .typeset p, 
-.article--post .typeset ul, 
-.article--post .typeset ol,
-.article--post .typeset blockquote,
-.article--post .typeset table,
-.article--post .typeset img {
-    max-width: 100% !important; 
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box !important; /* 确保 padding 不会超出 100% 宽度 */
-}
-
-/* 如果你的文章有图片或表格，它们也应该全宽显示 */
-.article--post .typeset figure,
-.article--post .typeset .image-wrap {
-    max-width: 100% !important;
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
-/* 4.5 确保代码块也能完全撑开 (虽然之前已经修复，这里是再次确认) */
-div.highlighter-rouge, figure.highlight, .highlight {
-    max-width: 100% !important;
-    width: 100% !important;
-}
-
-/* 4.6 响应式优化 (防止在极小屏幕上过于拥挤) */
-@media (max-width: 768px) {
-    .container, .main {
-        width: 96% !important; /* 手机端两边留更小的边距 */
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-}
-/* ==========================================================================
-   5. 其他组件 (阅读进度条 & 按钮)
-   ========================================================================== */
+/* 阅读进度条也改成清新绿 */
 #reading-progress {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, #3498db, #2ecc71);
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
   z-index: 9999;
-  transition: width 0.1s linear;
+  transition: width 0.15s ease;
 }
 
-button, .btn, .button {
-  padding: 0.6rem 1.4rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-weight: 600;
-}
-button:hover, .btn:hover, .button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+/* 分类卡片悬停也用绿光 */
+.layout--categories .post-list-item:hover {
+    border-color: rgba(52, 211, 153, 0.4);
+    box-shadow: 0 20px 40px rgba(52, 211, 153, 0.18);
 }
 
-.post-list-item {
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+/* ==========================================================================
+   彻底消灭所有红色！红！色！（导航栏、标签、focus、active 全覆盖）
+   ========================================================================== */
+/* 导航栏当前页/悬停/焦点 全部改成清新绿 */
+.site-header a,
+.navigation-header a,
+.site-nav a,
+.navigation-list a,
+.navigation-list a:hover,
+.navigation-list a:focus,
+.navigation-list a:active,
+.navigation-list a.active {
+  color: #10b981 !important;
+  border-bottom: 2px solid transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.navigation-list a:hover,
+.navigation-list a:focus,
+.navigation-list a.active {
+  color: #10b981 !important;
+  border-bottom-color: #10b981 !important;
+  background: rgba(52,211,153,0.08) !important;
+}
+
+/* 所有可能出现红色的地方强制绿（标签、post-meta、focus outline 等） */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+*:focus {
+  outline: 2px solid rgba(52,211,153,0.3) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(52,211,153,0.15) !important;
+}
+
+/* 文章标签也强制清新绿（永不红） */
+.post-tags a,
+.tags a,
+.tag,
+.tag a,
+.post-meta a,
+.post-meta a:hover {
+  background: rgba(52,211,153,0.12) !important;
+  color: #10b981 !important;
+  border: 1px solid rgba(52,211,153,0.3) !important;
+  border-radius: 8px !important;
+  padding: 0.2rem 0.6rem !important;
+}
+
+.post-tags a:hover,
+.tag a:hover {
+  background: rgba(52,211,153,0.2) !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   清新火箭返回顶部按钮（2025最火风格）
+   ========================================================================== */
+#back-to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 56px;
+  height: 56px;
   background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-}
-.post-list-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  border-color: rgba(37, 99, 235, 0.2);
-}
-
-/* ========== 分类页居中单栏布局最终修复 ========== */
-
-/* 整个分类页容器居中 */
-.layout--categories .main .container {
-    display: block !important;
-    max-width: 900px !important; /* 分类页宽度 */
-    margin: 0 auto !important;
+  color: #10b981;
+  border: 2px solid rgba(52,211,153,0.3);
+  border-radius: 50%;
+  box-shadow: 0 8px 25px rgba(52,211,153,0.25);
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 分类内容本身居中 */
-.layout--categories .content {
-    width: 100% !important;
-    max-width: 700px;
-    margin: 0 auto !important;
-    padding: 0 !important;
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-/* 移除右侧侧边栏（Alembic 默认的 Category index） */
-.layout--categories .aside {
-    display: none !important;
+#back-to-top:hover {
+  background: rgba(52,211,153,0.12);
+  color: #10b981;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(52,211,153,0.35);
+  border-color: #10b981;
 }
 
-/* 分类标题居中 */
-.layout--categories h1,
-.layout--categories h2,
-.layout--categories h3 {
-    text-align: center !important;
+/* 手机端稍微缩小 */
+@media (max-width: 640px) {
+  #back-to-top {
+    width: 48px;
+    height: 48px;
+    right: 20px;
+    bottom: 20px;
+  }
 }
 
-/* 分类项目列表居中 */
-.layout--categories ul, 
-.layout--categories li {
-    text-align: center !important;
-    list-style: none !important;
+/* 火箭返回顶部 - 清新绿终极版 */
+#back-to-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 58px;
+  height: 58px;
+  background: #ffffff;
+  color: #10b981;
+  border: 2.5px solid #10b981;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(16,185,129,0.3);
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 分类链接美化 */
-.layout--categories a {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    text-decoration: none;
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
-.layout--categories a:hover {
-    opacity: 0.8;
+
+#back-to-top:hover {
+  transform: translateY(-8px) scale(1.1);
+  box-shadow: 0 20px 45px rgba(16,185,129,0.4);
+  background: #ecfdf5;
 }
