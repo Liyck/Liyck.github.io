@@ -450,3 +450,50 @@ button:hover, .btn:hover, .button:hover {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   border-color: rgba(37, 99, 235, 0.2);
 }
+
+/* ========== 分类页居中单栏布局最终修复 ========== */
+
+/* 整个分类页容器居中 */
+.layout--categories .main .container {
+    display: block !important;
+    max-width: 900px !important; /* 分类页宽度 */
+    margin: 0 auto !important;
+}
+
+/* 分类内容本身居中 */
+.layout--categories .content {
+    width: 100% !important;
+    max-width: 700px;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* 移除右侧侧边栏（Alembic 默认的 Category index） */
+.layout--categories .aside {
+    display: none !important;
+}
+
+/* 分类标题居中 */
+.layout--categories h1,
+.layout--categories h2,
+.layout--categories h3 {
+    text-align: center !important;
+}
+
+/* 分类项目列表居中 */
+.layout--categories ul, 
+.layout--categories li {
+    text-align: center !important;
+    list-style: none !important;
+}
+
+/* 分类链接美化 */
+.layout--categories a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.layout--categories a:hover {
+    opacity: 0.8;
+}
