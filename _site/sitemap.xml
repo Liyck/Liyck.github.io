@@ -18,9 +18,6 @@
 <loc>http://localhost:4000/elements/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/categories/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/blog/</loc>
 </url>
 <url>
@@ -33,12 +30,6 @@
 <loc>http://localhost:4000/search/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/search/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/categories/e68a80e69caf/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/tags/jekyll/</loc>
 </url>
 <url>
@@ -46,5 +37,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/categories/%E6%8A%80%E6%9C%AF/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/categories/e68a80e69caf/</loc>
 </url>
 </urlset>

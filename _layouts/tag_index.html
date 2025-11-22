@@ -4,20 +4,29 @@ layout: default
 
 <div class="page-header">
   <h1 class="page-title">标签：{{ page.tag }}</h1>
+  <p class="page-subtitle">{{ page.posts.size }} 篇文章</p>
 </div>
 
-<div class="post-list">
+<div class="articles-grid">
   {% for post in page.posts %}
-    <article class="post-item">
-      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-      <h2 class="post-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h2>
-      {% if post.excerpt %}
-        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
-      {% endif %}
-    </article>
-  {% else %}
-    <p>暂无文章</p>
+    <a href="{{ post.url | relative_url }}" class="article-card">
+      <div class="article-date">{{ post.date | date: "%Y年%m月%d日" }}</div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      <span class="read-more">阅读全文 →</span>
+    </a>
   {% endfor %}
 </div>
+
+<style>
+  .page-subtitle { text-align: center; color: #64748b; margin: -1rem 0 3.5rem; font-size: 1.1rem; }
+  .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.2rem; padding: 0 1rem; }
+  .article-card { background: #ffffff; border-radius: 24px; padding: 2.8rem 2.2rem; text-decoration: none; box-shadow: 0 6px 25px rgba(0,0,0,0.06); border: 1.5px solid rgba(52,211,153,0.12); transition: all 0.45s ease; position: relative; overflow: hidden; }
+  .article-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(52,211,153,0.09), rgba(110,231,183,0.09)); opacity: 0; transition: opacity 0.45s; }
+  .article-card:hover::before { opacity: 1; }
+  .article-card:hover { transform: translateY(-16px); box-shadow: 0 30px 60px rgba(52,211,153,0.25); border-color: rgba(52,211,153,0.5); }
+  .article-date { color: #10b981; font-weight: 600; }
+  .article-title { font-size: 1.55rem; font-weight: 700; color: #0f172a; margin: 0 0 1.2rem; }
+  .article-excerpt { color: #475569; line-height: 1.7; }
+  .read-more { color: #10b981; font-weight: 700; font-size: 1.05rem; }
+</style>

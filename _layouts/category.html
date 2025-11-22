@@ -4,11 +4,11 @@ layout: default
 
 <div class="page-header">
   <h1 class="page-title">分类：{{ page.category }}</h1>
-  <p class="page-subtitle">{{ page.posts.size }} 篇文章</p>
+  <p class="page-subtitle">{{ site.categories[page.category].size }} 篇文章</p>
 </div>
 
 <div class="articles-grid">
-  {% for post in page.posts %}
+  {% for post in site.categories[page.category] %}
     <a href="{{ post.url | relative_url }}" class="article-card">
       <div class="article-date">{{ post.date | date: "%Y年%m月%d日" }}</div>
       <h2 class="article-title">{{ post.title }}</h2>
@@ -19,6 +19,7 @@ layout: default
 </div>
 
 <style>
+  /* 完全复用上面分类总页的卡片样式 */
   .page-subtitle { text-align: center; color: #64748b; margin: -1rem 0 3.5rem; font-size: 1.1rem; }
   .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.2rem; padding: 0 1rem; }
   .article-card { background: #ffffff; border-radius: 24px; padding: 2.8rem 2.2rem; text-decoration: none; box-shadow: 0 6px 25px rgba(0,0,0,0.06); border: 1.5px solid rgba(52,211,153,0.12); transition: all 0.45s ease; position: relative; overflow: hidden; }

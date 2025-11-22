@@ -43,34 +43,6 @@
     
 
     
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@16px.png" sizes="16x16">
-    <link rel="apple-touch-icon" sizes="16x16" href="/assets/logos/logo@16px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@32px.png" sizes="32x32">
-    <link rel="apple-touch-icon" sizes="32x32" href="/assets/logos/logo@32px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@96px.png" sizes="96x96">
-    <link rel="apple-touch-icon" sizes="96x96" href="/assets/logos/logo@96px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@120px.png" sizes="120x120">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/logos/logo@120px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@144px.png" sizes="144x144">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/logos/logo@144px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@180px.png" sizes="180x180">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logos/logo@180px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@512px.png" sizes="512x512">
-    <link rel="apple-touch-icon" sizes="512x512" href="/assets/logos/logo@512px.png">
-  
-    <link rel="icon" type="image/png" href="/assets/logos/logo@1024px.png" sizes="1024x1024">
-    <link rel="apple-touch-icon" sizes="1024x1024" href="/assets/logos/logo@1024px.png">
-  
-
-<link rel="shortcut icon" href="">
-
 
     
 
@@ -124,7 +96,7 @@
 
     <div class="page-header">
   <h1 class="page-title">所有分类</h1>
-  <p class="page-description">目前共计 1 个分类</p>
+  <p class="page-subtitle">共 1 个分类 · 2 篇文章</p>
 </div>
 
 <div class="categories-grid">
@@ -133,92 +105,23 @@
     
     
     <a href="/categories/技术/" class="category-card">
-      <div class="category-name">技术</div>
-      <div class="category-count">2 篇</div>
+      <div class="cat-name">技术</div>
+      <div class="cat-count">2 篇</div>
     </a>
   
 </div>
 
 <style>
-  .page-description {
-    text-align: center;
-    color: #64748b;
-    font-size: 1.1rem;
-    margin-top: -1rem;
-  }
-
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.8rem;
-    margin-top: 3rem;
-    padding: 0 1rem;
-  }
-
-  .category-card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border: 1px solid rgba(52,211,153,0.1);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .category-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(110,231,183,0.08));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .category-card:hover::before {
-    opacity: 1;
-  }
-
-  .category-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 25px 50px rgba(52,211,153,0.22);
-    border-color: rgba(52,211,153,0.4);
-  }
-
-  .category-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.8rem;
-  }
-
-  .category-count {
-    background: linear-gradient(to right, #34d399, #6ee7b7);
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    display: inline-block;
-  }
-
-  /* 手机端优化 */
-  @media (max-width: 640px) {
-    .categories-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-    .category-card {
-      padding: 2rem 1rem;
-    }
-    .category-name {
-      font-size: 1.4rem;
-    }
-  }
+  .page-subtitle { text-align: center; color: #64748b; margin: -1rem 0 3rem; font-size: 1.1rem; }
+  .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 0 1rem; }
+  .category-card { background: #ffffff; border-radius: 20px; padding: 2.5rem; text-align: center; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(52,211,153,0.1); transition: all 0.4s ease; position: relative; overflow: hidden; }
+  .category-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(110,231,183,0.08)); opacity: 0; transition: opacity 0.4s; }
+  .category-card:hover::before { opacity: 1; }
+  .category-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px rgba(52,211,153,0.22); }
+  .cat-name { font-size: 1.6rem; font-weight: 700; color: #0f172a; }
+  .cat-count { background: linear-gradient(to right, #34d399, #6ee7b7); color: white; padding: 0.4rem 1rem; border-radius: 999px; font-weight: 600; margin-top: 0.8rem; display: inline-block; }
 </style>
+
 
 
     <script type="text/javascript">
