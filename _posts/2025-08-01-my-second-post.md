@@ -2,7 +2,7 @@
 layout: post
 title: "seccomp沙盒绕过"
 date: 2025-08-01 10:00:00 +0800
-categories: ["技术"]
+categories: ["pwn"]
 tags: [Jekyll, Markdown]
 excerpt: "开始吧，我的blog"
 feature_text: |
@@ -916,3 +916,4 @@ syscall
 
 一直在学习大佬的路上
 转载作者原文 https://www.cnblogs.com/xmiscx/p/18827064
+
