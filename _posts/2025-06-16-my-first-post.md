@@ -2,7 +2,7 @@
 layout: post
 title: "我的第一篇博客"
 date: 2025-06-16 10:00:00 +0800
-categories: [pwn]
+categories: ["技术"]
 tags: [Jekyll, Markdown]
 excerpt: "开始吧，我的blog"
 feature_text: |
@@ -28,4 +28,5 @@ puts "Hello, Jekyll!"
 ```
 
 undefined
+
 
