@@ -8,7 +8,6 @@ exclude:
   - CONTRIBUTING.md
   - screenshot.png
   - LICENSE
-  - CNAME
   - Gemfile
   - Gemfile.lock
   - alembic-jekyll-theme.gemspec
