@@ -1,0 +1,9 @@
+{
+  "lang": "zh-CN",
+  "name": "Liyck的技术博客",
+  "short_name": "Liyck的技术博客",
+  "theme_color": "#24292e",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "display": "standalone"
+}
