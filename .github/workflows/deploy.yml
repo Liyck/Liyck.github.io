@@ -1,0 +1,40 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 或者是 master，请确认你的源码在哪个分支
+  workflow_dispatch:
+
+# 🔥 核心修复：赋予 GITHUB_TOKEN 写权限，解决 403 报错
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # 与你本地 Ruby 版本一致即可
+          bundler-cache: true # 自动缓存依赖，加快构建速度
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build Site
+        # 这里是关键！Action 会像你本地一样执行构建，所有插件都会生效
+        run: bundle exec jekyll build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site  # 将构建好的网站文件夹推送出去
+          force_orphan: true    # 保持 gh-pages 分支干净
